@@ -1,8 +1,6 @@
 <?php
-namespace InDemandDigital\Entities;
+namespace InDemandDigital\IDDFramework\Entities;
 use InDemandDigital as IDD;
-
-use \ReflectionClass;
 
 class Entity{
 //table index - which db table stores which entities
