@@ -13,19 +13,26 @@ public static $pass;
 public static $name;
 private static $conn; // the connection
 
-public function connect($server = null,$user = null,$pass = null,$name = null){
+public static function forceLocal(){
+    $_SESSION['local'] = True;
+}
+public static function forceRemote(){
+    $_SESSION['local'] = False;
+}
+
+public static function connect($server = null,$user = null,$pass = null,$name = null){
     self::setDatabaseCredentials($server,$user,$pass,$name);
     self::$conn = new mysqli(self::$server, self::$user, self::$pass, self::$name);
     return self::checkConnection();
 }
 
-public function connectToMailingList(){
+public static function connectToMailingList(){
     self::setDatabaseCredentialsMailingList();
     self::$conn = new mysqli(self::$server, self::$user, self::$pass, self::$name);
     return self::checkConnection();
 }
 
-public function connectToSocialManager(){
+public static function connectToSocialManager(){
     self::setDatabaseCredentialsSocialManager();
     self::$conn = new mysqli(self::$server, self::$user, self::$pass, self::$name);
     return self::checkConnection();
