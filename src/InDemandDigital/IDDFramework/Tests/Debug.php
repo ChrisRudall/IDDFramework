@@ -1,5 +1,5 @@
 <?php
-namespace InDemandDigital\Tests;
+namespace InDemandDigital\IDDFramework\Tests;
 
 class Debug{
 
