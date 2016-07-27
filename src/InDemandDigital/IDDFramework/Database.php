@@ -1,6 +1,6 @@
 <?php
-namespace InDemandDigital;
-use InDemandDigital\Tests\Debug as Debug;
+namespace InDemandDigital\IDDFramework;
+use InDemandDigital\IDDFramework\Tests\Debug as Debug;
 use mysqli;
 
 session_start();
