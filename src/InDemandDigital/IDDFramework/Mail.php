@@ -1,5 +1,5 @@
 <?php
-namespace InDemandDigital;
+namespace InDemandDigital\IDDFramework;
 
 class Mail{
     const unsubscribeUrl = "http://listmanager.indemandmusic.com/unsubscribe.php?mailshot_id=##mailshot_id##&uuid=##UUID##";

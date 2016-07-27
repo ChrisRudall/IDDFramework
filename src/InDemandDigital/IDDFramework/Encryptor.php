@@ -1,5 +1,5 @@
 <?php
-namespace InDemandDigital;
+namespace InDemandDigital\IDDFramework;
 use \Defuse\Crypto\Crypto;
 use \Defuse\Crypto\Key;
 

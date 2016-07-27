@@ -1,5 +1,5 @@
 <?php
-namespace InDemandDigital;
+namespace InDemandDigital\IDDFramework;
 use DateTime;
 
 use InDemandDigital\Tests\Debug as Debug;

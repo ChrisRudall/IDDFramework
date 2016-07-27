@@ -1,5 +1,5 @@
 <?php
-namespace InDemandDigital\Entities;
+namespace InDemandDigital\IDDFramework\Entities;
 use InDemandDigital as IDD;
 
 

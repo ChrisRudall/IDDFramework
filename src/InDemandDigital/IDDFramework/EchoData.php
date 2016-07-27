@@ -1,5 +1,5 @@
 <?php
-namespace InDemandDigital;
+namespace InDemandDigital\IDDFramework;
 
 
 class EchoData{
