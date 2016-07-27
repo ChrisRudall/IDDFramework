@@ -1,0 +1,8 @@
+{
+    "name": "ChrisRudall/IDDFramework",
+    "autoload": {
+        "psr-0" : {
+            "ChrisRudall\\IDDFramework" : "src"
+        }
+    }
+}
