@@ -57,7 +57,7 @@ public function commit(){
 
 private function setDatabaseCredentials($server,$user,$pass,$name){
 
-    if ($_SESSION['local'] === 'True'){
+    if ($_SESSION['local'] === True){
         self::$server = '127.0.0.1';
         self::$user = 'root';
         self::$pass = 'A101$pwmnnaDe';
@@ -81,7 +81,7 @@ private function setDatabaseCredentials($server,$user,$pass,$name){
 
 private function setDatabaseCredentialsMailingList(){
 
-    if ($_SESSION['local'] === 'True'){
+    if ($_SESSION['local'] === True){
         self::$server = '127.0.0.1';
         self::$user = 'root';
         self::$pass = 'A101$pwmnnaDe';
@@ -97,7 +97,7 @@ private function setDatabaseCredentialsMailingList(){
 
 private function setDatabaseCredentialsSocialManager(){
 
-    if ($_SESSION['local'] === 'True'){
+    if ($_SESSION['local'] === True){
         self::$server = '127.0.0.1';
         self::$user = 'root';
         self::$pass = 'A101$pwmnnaDe';
