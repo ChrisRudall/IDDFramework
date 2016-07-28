@@ -19,23 +19,32 @@ class SocialPost extends Entity{
         }
     }
 
+
     function printText(){
-        if($this->text){
-            echo "<div class='text'>";
-            echo $post->text;
+        if($this->text != ""){
+            echo "<div class='contentitem text'>";
+            echo $this->text;
             echo "</div>";
         }
     }
+    function printURL(){
+        if($this->url != ""){
+            echo "<div class='contentitem url'>";
+            echo "<a href='$this->url'>";
+            echo $this->url;
+            echo "</a></div>";
+        }
+    }
     function printMedia(){
-        if($this->media){
-            echo "<div class='media'>";
-            echo "<img src='assets/$post->media'>";
+        if($this->media != ""){
+            echo "<div class='contentitem media'>";
+            echo "<img src='assets/$this->media'>";
             echo "</div>";
         }
     }
     function printMediaURL(){
-        if($this->media){
-            echo $this->media;
+        if($this->media != ""){
+            echo "assets/".$this->media;
         }
     }
 }
