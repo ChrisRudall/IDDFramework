@@ -1,7 +1,7 @@
 <?php
 namespace InDemandDigital\IDDFramework\Entities;
 
-class SocialStatus extends Entity{
+class SocialPost extends Entity{
 
 }
 ?>
