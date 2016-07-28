@@ -1,7 +1,7 @@
 <?php
 namespace InDemandDigital\IDDFramework;
-use InDemandDigital\Tests\Debug as Debug;
-use InDemandDigital\Entities as Ent;
+use InDemandDigital\IDDFramework\Tests\Debug as Debug;
+use InDemandDigital\IDDFramework\Entities as Ent;
 use DateTime;
 use DateInterval;
 // $p = get_include_path();

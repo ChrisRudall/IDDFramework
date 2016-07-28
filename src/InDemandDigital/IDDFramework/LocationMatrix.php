@@ -2,7 +2,7 @@
 namespace InDemandDigital\IDDFramework;
 use DateTime;
 
-use InDemandDigital\Tests\Debug as Debug;
+use InDemandDigital\IDDFramework\Tests\Debug as Debug;
 
 set_include_path("v2/");
 

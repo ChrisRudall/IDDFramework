@@ -1,6 +1,6 @@
 <?php
 namespace InDemandDigital\IDDFramework\Entities;
-use InDemandDigital as IDD;
+use InDemandDigital\IDDFramework as IDD;
 use InDemandDigital\Tests\Debug as Debug;
 
 class Room extends Entity{
