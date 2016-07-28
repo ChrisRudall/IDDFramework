@@ -1,6 +1,8 @@
 <?php
 namespace InDemandDigital\IDDFramework\Entities;
 use InDemandDigital\IDDFramework as IDD;
+use InDemandDigital\IDDFramework\Tests\Debug as Debug;
+
 
 class Entity{
 //table index - which db table stores which entities
@@ -84,6 +86,7 @@ class Entity{
         // debug::NicePrint("getIDprotected");
         $table = $this->getTableNameFromEntity();
         $sql = "SELECT * FROM $table WHERE `id`=$id";
+        Debug::NicePrint($sql);
         $rs = IDD\Database::query($sql);
         return IDD\Encryptor::decodeObject( $rs->fetch_object() );
     }
