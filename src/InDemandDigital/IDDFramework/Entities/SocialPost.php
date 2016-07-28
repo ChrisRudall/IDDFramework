@@ -18,5 +18,25 @@ class SocialPost extends Entity{
             }
         }
     }
+
+    function printText(){
+        if($this->text){
+            echo "<div class='text'>";
+            echo $post->text;
+            echo "</div>";
+        }
+    }
+    function printMedia(){
+        if($this->media){
+            echo "<div class='media'>";
+            echo "<img src='assets/$post->media'>";
+            echo "</div>";
+        }
+    }
+    function printMediaURL(){
+        if($this->media){
+            echo $this->media;
+        }
+    }
 }
 ?>
