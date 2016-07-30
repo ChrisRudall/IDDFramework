@@ -133,7 +133,11 @@ private function checkConnection(){
 
 public function query($sql){
     // Debug::nicePrint("SQL CALL: ".$sql);
-    return self::$conn->query($sql);
+    if(self::$conn){
+        return self::$conn->query($sql);
+    }else{
+        die("Did you forget to connect to the database?");
+    }
 }
 public function getInsertedID(){
     return self::$conn->insert_id;
