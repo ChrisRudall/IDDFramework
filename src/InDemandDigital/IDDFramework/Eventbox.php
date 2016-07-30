@@ -1,8 +1,16 @@
 <?php
-namespace InDemandDigital\Eventbox;
-use InDemandDigital\IDDFramework AS IDD;
+namespace InDemandDigital\IDDFramework;
+use \InDemandDigital\IDDFramework\Entities AS Ent;
 
-class eventbox{
+class Eventbox{
+    public $event;
+
+    function __construct($eventid){
+        $this->$event = new Ent\Event($eventid);
+    }
+
+    public function echoEventName(){
+    }
 
 }
 
@@ -164,26 +172,26 @@ function printTag($artist){
 
 // START SCRIPT
 // GET PARAMS
-$id = $_GET["id"];
-$datatype = $_GET["datatype"];
-$displaytype = $_GET["displaytype"];
-$displaytype = $_GET["displaytype"];
-$GLOBALS["columns"] =  $_GET["columns"];
-$GLOBALS["showdate"] =  $_GET["showdate"];
-
-$roomlimit = $artistlimit = 100;
-$GLOBALS["showtag"] = $_GET["showtag"];
-if ($_GET["roomlimit"]){
-    $roomlimit = $_GET["roomlimit"];
-}
-if ($_GET["artistlimit"]){
-    $artistlimit = $_GET["artistlimit"];
-}
-if ($_GET["textoffset"]){
-    $GLOBALS['textoffset'] = $_GET["textoffset"];
-}
-else{$GLOBALS['textoffset'] = "120";
-}
+// $id = $_GET["id"];
+// $datatype = $_GET["datatype"];
+// $displaytype = $_GET["displaytype"];
+// $displaytype = $_GET["displaytype"];
+// $GLOBALS["columns"] =  $_GET["columns"];
+// $GLOBALS["showdate"] =  $_GET["showdate"];
+//
+// $roomlimit = $artistlimit = 100;
+// $GLOBALS["showtag"] = $_GET["showtag"];
+// if ($_GET["roomlimit"]){
+//     $roomlimit = $_GET["roomlimit"];
+// }
+// if ($_GET["artistlimit"]){
+//     $artistlimit = $_GET["artistlimit"];
+// }
+// if ($_GET["textoffset"]){
+//     $GLOBALS['textoffset'] = $_GET["textoffset"];
+// }
+// else{$GLOBALS['textoffset'] = "120";
+// }
 
 
 // if ($datatype == 'event'){
@@ -198,18 +206,18 @@ else{$GLOBALS['textoffset'] = "120";
 // else {
 //   echo "no datatype set";
 // }
-switch ($datatype) {
-    case 'event':
-        renderEvent($id,$artistlimit,$roomlimit,$displaytype);
-        break;
-    case 'room':
-    if($displaytype == 'eventblock'){
-        echo "ERROR - DATATYPE MISMATCH - CANNOT USE EVENT DISPLAY TYPE FOR ROOM DATA";
-        }
-      renderRoom($id,$artistlimit,$displaytype);
-        break;
-    default:
-        echo "no datatype set";
-        break;
-    }
+// switch ($datatype) {
+//     case 'event':
+//         renderEvent($id,$artistlimit,$roomlimit,$displaytype);
+//         break;
+//     case 'room':
+//     if($displaytype == 'eventblock'){
+//         echo "ERROR - DATATYPE MISMATCH - CANNOT USE EVENT DISPLAY TYPE FOR ROOM DATA";
+//         }
+//       renderRoom($id,$artistlimit,$displaytype);
+//         break;
+//     default:
+//         echo "no datatype set";
+//         break;
+//     }
 ?>
