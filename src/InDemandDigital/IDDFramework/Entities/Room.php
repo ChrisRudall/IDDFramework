@@ -12,14 +12,15 @@ class Room extends Entity{
         return new Event($this->event);
     }
     public function getPerformances(){
-        Debug::niceprint("getPerformancesForRoomID");
+        // Debug::niceprint("getPerformancesForRoomID");
         $sql = "SELECT * FROM `performances` WHERE `room_id`=$this->id ORDER BY `start_time`";
         $result = IDD\Database::query($sql);
         return self::convertResultSetToObjectArray($result,'InDemandDigital\Entities\Performance');
     }
     public function getPerformancesByDisplayOrder($limit = NULL){
-        Debug::niceprint("getPerformancesForRoomID");
+
         $sql = "SELECT * FROM `performances` WHERE `room_id`=$this->id ORDER BY `display_order` LIMIT $limit";
+            Debug::niceprint($sql);
         $result = IDD\Database::query($sql);
         while ($r = $rs->fetch_object('InDemandDigital\Entities\Performance')){
             $a [] = $r;
