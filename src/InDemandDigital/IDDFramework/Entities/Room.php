@@ -21,7 +21,7 @@ class Room extends Entity{
 
         $sql = "SELECT * FROM `performances` WHERE `room_id`=$this->id ORDER BY `display_order` LIMIT $limit";
             Debug::niceprint($sql);
-        $result = IDD\Database::query($sql);
+        $rs = IDD\Database::query($sql);
         while ($r = $rs->fetch_object('InDemandDigital\Entities\Performance')){
             $a [] = $r;
         }
