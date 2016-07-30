@@ -1,7 +1,7 @@
 <?php
 namespace InDemandDigital\IDDFramework\Entities;
 use InDemandDigital\IDDFramework as IDD;
-use InDemandDigital\Tests\Debug as Debug;
+use InDemandDigital\IDDFramework\Tests\Debug as Debug;
 
 class Room extends Entity{
 
@@ -12,13 +12,13 @@ class Room extends Entity{
         return new Event($this->event);
     }
     public function getPerformances(){
-        debug::niceprint("getPerformancesForRoomID");
+        Debug::niceprint("getPerformancesForRoomID");
         $sql = "SELECT * FROM `performances` WHERE `room_id`=$this->id ORDER BY `start_time`";
         $result = IDD\Database::query($sql);
         return self::convertResultSetToObjectArray($result,'InDemandDigital\Entities\Performance');
     }
     public function getPerformancesByDisplayOrder($limit = NULL){
-        debug::niceprint("getPerformancesForRoomID");
+        Debug::niceprint("getPerformancesForRoomID");
         $sql = "SELECT * FROM `performances` WHERE `room_id`=$this->id ORDER BY `display_order` LIMIT $limit";
         $result = IDD\Database::query($sql);
         while ($r = $rs->fetch_object('InDemandDigital\Entities\Performance')){
