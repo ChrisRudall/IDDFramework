@@ -17,5 +17,14 @@ class Room extends Entity{
         $result = IDD\Database::query($sql);
         return self::convertResultSetToObjectArray($result,'InDemandDigital\Entities\Performance');
     }
+    public function getPerformancesByDisplayOrder($limit = NULL){
+        debug::niceprint("getPerformancesForRoomID");
+        $sql = "SELECT * FROM `performances` WHERE `room_id`=$this->id ORDER BY `display_order` LIMIT $limit";
+        $result = IDD\Database::query($sql);
+        while ($r = $rs->fetch_object('InDemandDigital\Entities\Performance')){
+            $a [] = $r;
+        }
+        return $a;
+    }
 }
 ?>
