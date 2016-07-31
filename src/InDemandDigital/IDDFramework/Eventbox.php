@@ -34,6 +34,7 @@ class Eventbox{
     function __construct($eventid){
         Database::connect();
         $this->event = new Ent\Event($eventid);
+        $this->id = "eventboxid-".rand();
         if(self::$cssdone == 0){
             echo self::css;
             self::$cssdone = 1;
@@ -69,8 +70,8 @@ class Eventbox{
         //set image to headliner pic
         $this->performances = $this->rooms[$this->room_offset]->getPerformancesByDisplayOrder(10);
         $this->setImage();
-        $this->id = $this->event->id;
-        echo "<div class='eventbox' id='eventbox-eventid-$this->id'>";
+        // $this->id = $this->event->id;
+        echo "<div class='eventbox' id='$this->id'>";
         echo "<img class='eventboximage' src='$this->image'>";
 
 
@@ -98,7 +99,7 @@ class Eventbox{
 
 
     private function renderRoom (){
-        $this->id = "eventbox-roomid-".$this->room->id;
+        // $this->id = "eventbox-roomid-".$this->room->id;
         $this->performances = $this->room->getPerformancesByDisplayOrder($artistlimit);
         $this->setImage();
 
@@ -124,7 +125,7 @@ class Eventbox{
     }
 
     private function renderFeatureRoom (){
-        $this->id = "eventbox-roomid-".$this->room->id;
+        // $this->id = "eventbox-roomid-".$this->room->id;
         $this->performances = $this->room->getPerformancesByDisplayOrder($artistlimit);
         $this->setImage();
 
