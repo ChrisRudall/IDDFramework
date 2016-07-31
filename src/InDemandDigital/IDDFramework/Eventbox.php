@@ -13,6 +13,8 @@ class Eventbox{
     // @param offset - int - rooms display chronologically by default, use offset to target further into the future
     // @param showtag - bool - whether to show the additional tag info
     //@param $feature - sets whther to display in feature mode
+    //@param $feature_offset - feature a different artist in the lineup. can also use to change picture on a box
+
 
     //@param showRoom - displays lineup of artists in a given room
     //@param showAllRooms - displays all the rooms at a given event
@@ -23,6 +25,8 @@ class Eventbox{
     public $offset = 0;
     public $showtag = True;
     public $feature = False;
+    public $feature_offset = 0;
+
 
     const css = "<link rel='stylesheet' type='text/css' href='/vendor/InDemandDigital/IDDFramework/css/eventbox.css'>";
     private static $cssdone = 0;
@@ -127,7 +131,7 @@ class Eventbox{
         echo "<div class='eventbox' id='$this->id'>";
         echo "<img class='eventboximage' src='$this->image'>";
         echo "<div class='eventboxtext feature'>";
-        echo "<div class='eventboxtitle feature'>{$this->performances[0]->artist->name}<br><span class='fadedtext feature'>{$this->performances[0]->artist->tagline}</span></div>";
+        echo "<div class='eventboxtitle feature'>{$this->performances[$this->feature_offset]->artist->name}<br><span class='fadedtext feature'>{$this->performances[$this->feature_offset]->artist->tagline}</span></div>";
         echo "<div class='eventboxinfo feature'>"; echo $this->room->name; echo "</div>";
         echo "<div class='tag feature'>&nbsp{$this->room->prettydate}</div>";
         echo "</div>";
@@ -135,8 +139,8 @@ class Eventbox{
     }
 
     private function setImage(){
-        if ($this->performances[0]->artist->img1){
-            $this->image = "https://portal.indemandmusic.com/assets/images/profile_images/" . $this->performances[0]->artist->img1;
+        if ($this->performances[$this->feature_offset]->artist->img1){
+            $this->image = "https://portal.indemandmusic.com/assets/images/profile_images/" . $this->performances[$this->feature_offset]->artist->img1;
            }
         else
             {$this->image = "http://www1.theladbible.com/images/content/53959ef6501b3.jpg";
