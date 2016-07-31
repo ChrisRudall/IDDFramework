@@ -25,40 +25,62 @@
 
 }
 
+.eventboxtext{
+    position: absolute;
+    bottom: 20px;
+    width: 100%;
+}
 
 .eventboxinfo {
-	font-size:1em;
 	color:white;
 	text-transform:uppercase;
 	text-align:left;
 	background-color:rgba(0, 0, 0, 0.7);
 	padding:2px 5px 2px 5px;
-	width:100%;
+	/*width:100%;*/
 
    z-index: 100;
+   float: left;
+   clear: left;
 
 }
-.eventboxtext{
-    position: absolute;
-    bottom: 0px;
-    width: 100%;
-}
-
-.eventboxtitle{
-    font-size: 1.2em;
-    position:absolute;
-    top:10px;
-    left:0px;
-    padding:5px 10px 5px 10px;
-    background-color: rgba(255, 255, 0, 0.8);
-    border-radius: 0px 0px 20px 0px;
-}
-
-
 .tag {
   font-size:0.8em;
   text-transform: lowercase;
   color:yellow;
   white-space: nowrap;
-  display: inline-block;
+  background-color:rgba(0, 0, 0, 0.7);
+  float: left;
+padding: 5px;
+
+}
+
+
+
+.eventboxtitle{
+    font-size: 1.2em;
+    /*position:absolute;
+    top:10px;
+    left:0px;*/
+    /*width:auto;*/
+    float:left;
+    padding:5px 10px 5px 10px;
+    background-color: rgba(255, 255, 0, 0.8);
+    border-radius: 0px 20px 0px 0px;
+}
+
+.eventboxtitle.feature{
+    font-size: 48pt;
+    line-height: 36px;
+    color: white;
+}
+.eventboxinfo.feature{
+    font-size: 18pt;
+	text-transform: lowercase;
+}
+.fadedtext.feature{
+    font-size: 36pt;
+}
+.tag.feature{
+    clear:both;
 }

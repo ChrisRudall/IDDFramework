@@ -33,6 +33,7 @@ $eventbox = new IDD\Eventbox(8);
 $eventbox->offset = 1;
 $eventbox->showtag = true;
 $eventbox->height = 400;
+$eventbox->feature = True;
 $eventbox->showRoom();
 ?>
 

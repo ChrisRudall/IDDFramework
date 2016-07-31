@@ -12,6 +12,7 @@ class Eventbox{
     // @param roomlimit - int - limit rooms displayed (all rooms only)
     // @param offset - int - rooms display chronologically by default, use offset to target further into the future
     // @param showtag - bool - whether to show the additional tag info
+    //@param $feature - sets whther to display in feature mode
 
     //@param showRoom - displays lineup of artists in a given room
     //@param showAllRooms - displays all the rooms at a given event
@@ -21,6 +22,7 @@ class Eventbox{
     public $roomlimit = 1000;
     public $offset = 0;
     public $showtag = True;
+    public $feature = False;
 
     const css = "<link rel='stylesheet' type='text/css' href='/vendor/InDemandDigital/IDDFramework/css/eventbox.css'>";
     private static $cssdone = 0;
@@ -28,7 +30,6 @@ class Eventbox{
     function __construct($eventid){
         Database::connect();
         $this->event = new Ent\Event($eventid);
-        $this->id = "eventbox".rand();
         if(self::$cssdone == 0){
             echo self::css;
             self::$cssdone = 1;
@@ -44,7 +45,11 @@ class Eventbox{
             $this->room = $rooms[$this->offset];
             $this->room->prettydate = self::getNiceDate($this->room->start_time);
         }
-        $this->renderRoom();
+        if($this->feature == True){
+            $this->renderFeatureRoom();
+        }else{
+            $this->renderRoom();
+        }
     }
 
     function showAllRooms(){
@@ -60,16 +65,17 @@ class Eventbox{
         //set image to headliner pic
         $this->performances = $this->rooms[0]->getPerformancesByDisplayOrder(1);
         $this->setImage();
-
-        echo "<div class='eventbox' id='$this->id'>";
+        $this->id = $this->event->id;
+        echo "<div class='eventbox' id='eventbox-eventid-$this->id'>";
         echo "<img class='eventboximage' src='$this->image'>";
-        echo "<div class='eventboxtitle'>What's On</div>";
+
 
         echo "<div class='eventboxtext'>";
-
+    echo "<div class='eventboxtitle'>What's On</div>";
         foreach ($this->rooms as $room){
             echo "<div class='eventboxinfo'>";
             echo "<span class='fadedtext'>$room->prettydate</span> $room->name ";
+            echo "</div>";
             echo "<div class='tag'>";
             if($this->showtag == True){
                 $performances = $room->getPerformancesByDisplayOrder($this->artistlimit);
@@ -80,7 +86,7 @@ class Eventbox{
                 }
 
             }
-            echo "</div></div>";
+            echo "</div>";
 
             }
             echo "</div></div>";
@@ -88,32 +94,44 @@ class Eventbox{
 
 
     private function renderRoom (){
+        $this->id = "eventbox-roomid-".$this->room->id;
         $this->performances = $this->room->getPerformancesByDisplayOrder($artistlimit);
         $this->setImage();
 
         echo "<div class='eventbox' id='$this->id'>";
         echo "<img class='eventboximage' src='$this->image'>";
+        echo "<div class='eventboxtext'>";
         echo "<div class='eventboxtitle'>{$this->room->name}<br><span class='fadedtext'>{$this->room->prettydate}</span></div>";
-            echo "<div class='eventboxtext'>";
-            if($this->performances){
-                foreach ($this->performances as $performance){
-                        echo "<div class='eventboxinfo'>";
-                        echo $performance->artist->name;
-                        echo "<div class='tag'>&nbsp";
-                        if($this->showtag == True){
-                            echo $performance->artist->tagline;
 
-                        }
-                        echo "</div>";
-                        echo "</div>";
-
+        if($this->performances){
+            foreach ($this->performances as $performance){
+                    echo "<div class='eventboxinfo'>";
+                    echo $performance->artist->name;
+                    echo "</div>";
+                    echo "<div class='tag'>&nbsp";
+                    if($this->showtag == True){
+                        echo $performance->artist->tagline;
                     }
+                    echo "</div>";
             }
-
-            echo "</div>";
+        }
         echo "</div>";
+        echo "</div>";
+    }
 
+    private function renderFeatureRoom (){
+        $this->id = "eventbox-roomid-".$this->room->id;
+        $this->performances = $this->room->getPerformancesByDisplayOrder($artistlimit);
+        $this->setImage();
 
+        echo "<div class='eventbox' id='$this->id'>";
+        echo "<img class='eventboximage' src='$this->image'>";
+        echo "<div class='eventboxtext feature'>";
+        echo "<div class='eventboxtitle feature'>{$this->performances[0]->artist->name}<br><span class='fadedtext feature'>{$this->performances[0]->artist->tagline}</span></div>";
+        echo "<div class='eventboxinfo feature'>"; echo $this->room->name; echo "</div>";
+        echo "<div class='tag feature'>&nbsp{$this->room->prettydate}</div>";
+        echo "</div>";
+        echo "</div>";
     }
 
     private function setImage(){
