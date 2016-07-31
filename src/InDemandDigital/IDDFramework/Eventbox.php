@@ -67,7 +67,7 @@ class Eventbox{
 
     private function renderAllRooms(){
         //set image to headliner pic
-        $this->performances = $this->rooms[0]->getPerformancesByDisplayOrder(1);
+        $this->performances = $this->rooms[$this->room_offset]->getPerformancesByDisplayOrder(10);
         $this->setImage();
         $this->id = $this->event->id;
         echo "<div class='eventbox' id='eventbox-eventid-$this->id'>";
