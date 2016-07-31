@@ -1,0 +1,70 @@
+body{
+    font-family: sans-serif;
+}
+
+.eventbox {
+	display:inline-block;
+	/*min-width:200px;*/
+    /*height:300px;*/
+	padding:0px;
+	margin:0px;
+width: 100%;
+	position:relative;
+    top: 0px;
+    /*white-space: nowrap;*/
+    overflow: hidden;
+}
+
+.fadedtext{
+    color:grey;
+}
+
+
+.eventboximage {
+    width:100%;
+	height:300px;
+/*height: auto;*/
+    padding: 0px;
+    /*margin:-20px -20px -20px -0px;*/
+    object-fit: cover;
+    display: inline-block;
+
+}
+
+
+.eventboxinfo {
+	font-size:1em;
+	color:white;
+	text-transform:uppercase;
+	text-align:left;
+	background-color:rgba(0, 0, 0, 0.7);
+	padding:2px 5px 2px 5px;
+	width:100%;
+
+   z-index: 100;
+
+}
+.eventboxtext{
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+}
+
+.eventboxtitle{
+    font-size: 1.2em;
+    position:absolute;
+    top:10px;
+    left:0px;
+    padding:5px 10px 5px 10px;
+    background-color: rgba(255, 255, 0, 0.8);
+    border-radius: 0px 0px 20px 0px;
+}
+
+
+.tag {
+  font-size:0.8em;
+  text-transform: lowercase;
+  color:yellow;
+  white-space: nowrap;
+  display: inline-block;
+}

@@ -19,7 +19,10 @@ class Room extends Entity{
     }
     public function getPerformancesByDisplayOrder($limit = NULL){
 
-        $sql = "SELECT * FROM `performances` WHERE `room_id`=$this->id ORDER BY `display_order` LIMIT $limit";
+        $sql = "SELECT * FROM `performances` WHERE `room_id`=$this->id AND `display_order` != '0' ORDER BY `display_order`";
+        if($limit != NULL){
+            $sql = $sql . " LIMIT $limit";
+        }
             Debug::niceprint($sql);
         $rs = IDD\Database::query($sql);
         while ($r = $rs->fetch_object('InDemandDigital\IDDFramework\Entities\Performance')){
