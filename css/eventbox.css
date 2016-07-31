@@ -1,15 +1,14 @@
-body{
-    font-family: sans-serif;
-}
-
 .eventbox {
-	display:inline-block;
-	padding:0px;
-	margin:0px;
-    width: 100%;
+	/*display:inline-block;*/
+	/*padding:0px;*/
+	/*margin:0px;*/
+    /*width: 100%;*/
 	position:relative;
-    top: 0px;
-    overflow: hidden;
+    /*top: 0px;*/
+    /*overflow: hidden;*/
+    font-family: sans-serif;
+	text-align:left;
+
 }
 
 .fadedtext{

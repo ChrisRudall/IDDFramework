@@ -20,7 +20,7 @@ class Eventbox{
     public $artistlimit = 1000;
     public $roomlimit = 1000;
     public $offset = 0;
-    public $showtag = False;
+    public $showtag = True;
 
     const css = "<link rel='stylesheet' type='text/css' href='/vendor/InDemandDigital/IDDFramework/css/eventbox.css'>";
     private static $cssdone = 0;
@@ -95,18 +95,21 @@ class Eventbox{
         echo "<img class='eventboximage' src='$this->image'>";
         echo "<div class='eventboxtitle'>{$this->room->name}<br><span class='fadedtext'>{$this->room->prettydate}</span></div>";
             echo "<div class='eventboxtext'>";
-            foreach ($this->performances as $performance){
-                    echo "<div class='eventboxinfo'>";
-                    echo $performance->artist->name;
-                    echo "<div class='tag'>&nbsp";
-                    if($this->showtag == True){
-                        echo $performance->artist->tagline;
+            if($this->performances){
+                foreach ($this->performances as $performance){
+                        echo "<div class='eventboxinfo'>";
+                        echo $performance->artist->name;
+                        echo "<div class='tag'>&nbsp";
+                        if($this->showtag == True){
+                            echo $performance->artist->tagline;
+
+                        }
+                        echo "</div>";
+                        echo "</div>";
 
                     }
-                    echo "</div>";
-                    echo "</div>";
+            }
 
-        }
             echo "</div>";
         echo "</div>";
 
