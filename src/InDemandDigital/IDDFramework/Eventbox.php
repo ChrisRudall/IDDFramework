@@ -22,7 +22,7 @@ class Eventbox{
     public $event;
     public $artistlimit = 1000;
     public $roomlimit = 1000;
-    public $offset = 0;
+    public $room_offset = 0;
     public $showtag = True;
     public $feature = False;
     public $feature_offset = 0;
@@ -46,7 +46,7 @@ class Eventbox{
             $this->room->prettydate = self::getNiceDate($this->room->start_time);
         }else{
             $rooms = $this->event->getAllFutureRooms($this->roomlimit);
-            $this->room = $rooms[$this->offset];
+            $this->room = $rooms[$this->room_offset];
             $this->room->prettydate = self::getNiceDate($this->room->start_time);
         }
         if($this->feature == True){
