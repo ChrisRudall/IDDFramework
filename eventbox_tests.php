@@ -3,12 +3,6 @@ session_start();
 set_include_path('includes');
 Date_default_timezone_set('UTC');
 
-// check for local
-if($_SERVER['REMOTE_ADDR'] == "::1" || $_SERVER['REMOTE_ADDR'] == "127.0.0.1" || $_SERVER['HOME'] == "/Users/chrisrudall"){
-    $_SESSION['local'] = True;
-}else{
-    $_SESSION['local'] = False;
-}
 
 require 'vendor/autoload.php';
 

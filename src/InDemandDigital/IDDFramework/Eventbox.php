@@ -22,10 +22,17 @@ class Eventbox{
     public $offset = 0;
     public $showtag = False;
 
+    const css = "<link rel='stylesheet' type='text/css' href='/vendor/InDemandDigital/IDDFramework/css/eventbox.css'>";
+    private static $cssdone = 0;
+
     function __construct($eventid){
         Database::connect();
         $this->event = new Ent\Event($eventid);
         $this->id = "eventbox".rand();
+        if(self::$cssdone == 0){
+            echo self::css;
+            self::$cssdone = 1;
+        }
     }
 
     function showRoom($id = NULL){

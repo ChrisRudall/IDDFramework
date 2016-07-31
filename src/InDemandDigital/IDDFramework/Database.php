@@ -19,21 +19,34 @@ public static function forceLocal(){
 public static function forceRemote(){
     $_SESSION['local'] = False;
 }
+private static function checkForLocal(){
+    session_start();
+    if($_SERVER['REMOTE_ADDR'] == "::1" || $_SERVER['REMOTE_ADDR'] == "127.0.0.1" || $_SERVER['HOME'] == "/Users/chrisrudall"){
+        $_SESSION['local'] = True;
+    }else{
+        $_SESSION['local'] = False;
+    }
+}
 
 public static function connect($server = null,$user = null,$pass = null,$name = null){
+    self::checkForLocal();
     self::setDatabaseCredentials($server,$user,$pass,$name);
-    self::$conn = new mysqli(self::$server, self::$user, self::$pass, self::$name);
-    return self::checkConnection();
+    self::realConnect();
 }
 
 public static function connectToMailingList(){
+    self::checkForLocal();
     self::setDatabaseCredentialsMailingList();
-    self::$conn = new mysqli(self::$server, self::$user, self::$pass, self::$name);
-    return self::checkConnection();
+    self::realConnect();
 }
 
 public static function connectToSocialManager(){
+    self::checkForLocal();
     self::setDatabaseCredentialsSocialManager();
+    self::realConnect();
+}
+
+private static function realConnect(){
     self::$conn = new mysqli(self::$server, self::$user, self::$pass, self::$name);
     return self::checkConnection();
 }
