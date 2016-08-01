@@ -14,7 +14,7 @@ class Eventbox{
     // @param showtag - bool - whether to show the additional tag info
     //@param $feature - sets whther to display in feature mode
     //@param $feature_offset - feature a different artist in the lineup. can also use to change picture on a box
-
+    //@param $dark = true - set text darker for light backgrounds
 
     //@param showRoom - displays lineup of artists in a given room
     //@param showAllRooms - displays all the rooms at a given event
@@ -55,12 +55,14 @@ class Eventbox{
         }else{
             $this->renderRoom();
         }
+        $this->setStyle();
     }
 
     function showAllRooms(){
         $this->rooms = $this->event->getAllFutureRooms($this->roomlimit);
         $this->makeDatesPretty($this->rooms);
         $this->renderAllRooms();
+        $this->setStyle();
     }
 
 
@@ -172,7 +174,13 @@ class Eventbox{
             $room->prettydate = self::getNiceDate($room->start_time);
         }
     }
-
+    private function setStyle(){
+        if($this->dark == True){
+            echo "<style>";
+            echo "#$this->id .eventboxtitle{ color: black;}";
+            echo "</style>";
+        }
+    }
 
 }
 ?>

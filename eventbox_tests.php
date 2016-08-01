@@ -43,7 +43,8 @@ $eventbox->room_offset = 1;
 $eventbox->showtag = true;
 // $eventbox->height = 200;
 $eventbox->feature = True;
-$eventbox->feature_offset = 0;
+$eventbox->feature_offset = 1;
+$eventbox->dark = True;
 
 $eventbox->showRoom();
 ?>
