@@ -65,7 +65,7 @@
     font-size: 1.2em;
     float:left;
     padding:5px 10px 5px 10px;
-	margin-bottom: 15px;
+
     /*background-color: rgba(255, 255, 0, 0.8);*/
     border-radius: 0px 20px 0px 0px;
 	position: relative;
@@ -79,6 +79,7 @@
     line-height: 36px;
     color: white;
 	text-transform: lowercase;
+		margin-bottom: 15px;
 
 		/*text-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);*/
 }
