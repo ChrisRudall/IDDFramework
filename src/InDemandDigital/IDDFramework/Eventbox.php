@@ -104,7 +104,7 @@ class Eventbox{
 
     private function renderRoom (){
         // $this->id = "eventbox-roomid-".$this->room->id;
-        $this->performances = $this->room->getPerformancesByDisplayOrder($artistlimit);
+        $this->performances = $this->room->getPerformancesByDisplayOrder($this->artistlimit);
         $this->setImage();
 
         echo "<div class='eventbox' id='$this->id'>";
@@ -132,7 +132,7 @@ class Eventbox{
 
     private function renderFeatureRoom (){
         // $this->id = "eventbox-roomid-".$this->room->id;
-        $this->performances = $this->room->getPerformancesByDisplayOrder($artistlimit);
+        $this->performances = $this->room->getPerformancesByDisplayOrder($this->artistlimit);
         $this->setImage();
 
         echo "<div class='eventbox' id='$this->id'>";
