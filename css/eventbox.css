@@ -109,10 +109,17 @@ and (max-width : 768px)
 	.eventboxtext{
 	    bottom: 5px;
 	}
+	.eventboxtitle{
+		position: absolute;
+		bottom:0px;
+		right:0px;
+		border-radius: 20px 00px 0px 0px;
+
+	}
 .eventboxtitle.mobile{
 float: none;
 clear:none;
-display: inline-block;
+/*display: inline-block;*/
 	}
 .eventboximage{
 	height: 150px;
@@ -120,7 +127,8 @@ display: inline-block;
 .eventboxtitle.mobile.feature{
 	position: absolute;
 	bottom: 50px;
-	border-radius: 0px 30px 30px 0px;
+	left:0px;
+	/*border-radius: 0px 30px 30px 0px;*/
 	font-size: 24pt;
 	line-height: 10pt;
 

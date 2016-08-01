@@ -25,7 +25,7 @@ body{
 </head>
 <body>
 <?php
-Debug::$debug_level = 2;
+Debug::$debug_level = 0;
 
 $eventbox = new IDD\Eventbox(8);
 $eventbox->roomlimit = 6;
@@ -47,7 +47,7 @@ $eventbox = new IDD\Eventbox(8);
 $eventbox->room_offset = 1;
 $eventbox->showtag = true;
 // $eventbox->height = 200;
-// $eventbox->feature = True;
+$eventbox->feature = True;
 $eventbox->artistlimit = 4;
 $eventbox->feature_offset = 1;
 $eventbox->dark = True;

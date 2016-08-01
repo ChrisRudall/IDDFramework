@@ -108,11 +108,11 @@ class Eventbox{
         $this->setImage();
 
         echo "<div class='eventbox' id='$this->id'>";
-        echo "<div class='eventboxtitle mobile'>{$this->room->name}<br><span class='fadedtext'>{$this->room->prettydate}</span></div>";
+        // echo "<div class='eventboxtitle mobile'>{$this->room->name}<br><span class='fadedtext'>{$this->room->prettydate}</span></div>";
 
         echo "<img class='eventboximage' src='$this->image'>";
         echo "<div class='eventboxtext'>";
-        echo "<div class='eventboxtitle desktop'>{$this->room->name}<br><span class='fadedtext'>{$this->room->prettydate}</span></div>";
+        echo "<div class='eventboxtitle'>{$this->room->name}<br><span class='fadedtext'>{$this->room->prettydate}</span></div>";
 
         if($this->performances){
             foreach ($this->performances as $performance){
