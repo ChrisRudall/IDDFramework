@@ -1,3 +1,10 @@
+.desktop{
+	display: block;
+}
+.mobile{
+	display:none;
+}
+
 .eventbox {
 	/*display:inline-block;*/
 	/*padding:0px;*/
@@ -22,7 +29,6 @@
     padding: 0px;
     object-fit: cover;
     display: inline-block;
-
 }
 
 .eventboxtext{
@@ -37,13 +43,10 @@
 	text-align:left;
 	background-color:rgba(0, 0, 0, 0.7);
 	padding:2px 5px 2px 5px;
-	/*width:100%;*/
-
-   /*z-index: 100;*/
    float: left;
    clear: left;
-
 }
+
 .tag {
   font-size:0.8em;
   text-transform: lowercase;
@@ -53,30 +56,27 @@
   float: left;
   padding: 2px;
   margin: 2px;
-
 }
-
-
 
 .eventboxtitle{
     font-size: 1.2em;
-    /*position:absolute;
-    top:10px;
-    left:0px;*/
-    /*width:auto;*/
     float:left;
     padding:5px 10px 5px 10px;
-    background-color: rgba(255, 255, 0, 0.8);
+    /*background-color: rgba(255, 255, 0, 0.8);*/
     border-radius: 0px 20px 0px 0px;
 	position: relative;
 	z-index: 2;
+	color:#808000;
+	background-color: rgba(240, 240, 240, 0.8);
 }
 
 .eventboxtitle.feature{
     font-size: 48pt;
     line-height: 36px;
     color: white;
-		text-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);;
+	text-transform: lowercase;
+
+		/*text-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);*/
 }
 .eventboxinfo.feature{
     font-size: 18pt;
@@ -84,8 +84,47 @@
 }
 .fadedtext.feature{
     font-size: 36pt;
-	text-shadow: 0px 0px 0px rgba(0, 0, 0, 0.5);;
+	/*text-shadow: 0px 0px 0px rgba(0, 0, 0, 0.5);*/
 }
 .tag.feature{
     /*clear:both;*/
+}
+
+@media
+only screen
+and (max-width : 800px)
+/*and (orientation : portrait)*/
+{
+	.desktop{
+		display: none;
+	}
+	.mobile{
+		display: block;
+	}
+	.eventboxtext{
+	    position: absolute;
+	    bottom: 5px;
+	    width: 100%;
+	}
+.eventboxtitle.mobile{
+float: none;
+clear:none;
+/*position: absolute;*/
+/*bottom: 0px;*/
+display: block;
+	}
+.eventboxinfo{
+	/*float: right;*/
+	clear: none;
+
+	padding-left: 15px;
+}
+.eventboximage{
+	height: 150px;
+}
+.tag{
+	/*display: none;*/
+	/*float: right;*/
+}
+}
 }

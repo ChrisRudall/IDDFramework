@@ -72,16 +72,18 @@ class Eventbox{
         $this->setImage();
         // $this->id = $this->event->id;
         echo "<div class='eventbox' id='$this->id'>";
+        echo "<div class='eventboxtitle mobile'>What's On</div>";
+
         echo "<img class='eventboximage' src='$this->image'>";
 
 
         echo "<div class='eventboxtext'>";
-    echo "<div class='eventboxtitle'>What's On</div>";
+    echo "<div class='eventboxtitle desktop'>What's On</div>";
         foreach ($this->rooms as $room){
             echo "<div class='eventboxinfo'>";
             echo "<span class='fadedtext'>$room->prettydate</span> $room->name ";
             echo "</div>";
-            echo "<div class='tag'>";
+            echo "<div class='tag desktop'>";
             if($this->showtag == True){
                 $performances = $room->getPerformancesByDisplayOrder($this->artistlimit);
                 if($performances != null){
@@ -104,9 +106,11 @@ class Eventbox{
         $this->setImage();
 
         echo "<div class='eventbox' id='$this->id'>";
+        echo "<div class='eventboxtitle mobile'>{$this->room->name}<br><span class='fadedtext'>{$this->room->prettydate}</span></div>";
+
         echo "<img class='eventboximage' src='$this->image'>";
         echo "<div class='eventboxtext'>";
-        echo "<div class='eventboxtitle'>{$this->room->name}<br><span class='fadedtext'>{$this->room->prettydate}</span></div>";
+        echo "<div class='eventboxtitle desktop'>{$this->room->name}<br><span class='fadedtext'>{$this->room->prettydate}</span></div>";
 
         if($this->performances){
             foreach ($this->performances as $performance){
@@ -130,9 +134,11 @@ class Eventbox{
         $this->setImage();
 
         echo "<div class='eventbox' id='$this->id'>";
+        echo "<div class='eventboxtitle feature mobile'>{$this->performances[$this->feature_offset]->artist->name}<br><span class='fadedtext feature'>{$this->performances[$this->feature_offset]->artist->tagline}</span></div>";
+
         echo "<img class='eventboximage' src='$this->image'>";
         echo "<div class='eventboxtext feature'>";
-        echo "<div class='eventboxtitle feature'>{$this->performances[$this->feature_offset]->artist->name}<br><span class='fadedtext feature'>{$this->performances[$this->feature_offset]->artist->tagline}</span></div>";
+        echo "<div class='eventboxtitle feature desktop'>{$this->performances[$this->feature_offset]->artist->name}<br><span class='fadedtext feature'>{$this->performances[$this->feature_offset]->artist->tagline}</span></div>";
         echo "<div class='eventboxinfo feature'>"; echo $this->room->name; echo "</div>";
         echo "<div class='tag feature'>&nbsp{$this->room->prettydate}</div>";
         echo "</div>";
