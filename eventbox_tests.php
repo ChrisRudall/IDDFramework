@@ -17,6 +17,11 @@ use \InDemandDigital\IDDFramework\Tests\Debug AS Debug;
 <html>
 <head>
 <link rel="stylesheet" type="text/css" href="css/eventbox.css">
+<style>
+body{
+    background-color: black;
+}
+</style>
 </head>
 <body>
 <?php

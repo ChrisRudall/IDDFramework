@@ -29,6 +29,9 @@
     padding: 0px;
     object-fit: cover;
     display: inline-block;
+	border-top: 1px solid white;
+	border-bottom: 1px solid white;
+
 }
 
 .eventboxtext{
@@ -62,6 +65,7 @@
     font-size: 1.2em;
     float:left;
     padding:5px 10px 5px 10px;
+	margin-bottom: 15px;
     /*background-color: rgba(255, 255, 0, 0.8);*/
     border-radius: 0px 20px 0px 0px;
 	position: relative;
