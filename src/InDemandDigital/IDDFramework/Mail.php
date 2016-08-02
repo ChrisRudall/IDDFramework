@@ -302,13 +302,23 @@ public static function unsubscribe($person,$shot){
 
 //add new subscriber
 public static function addSubscriber($vars){
+    if(!$vars){
+        trigger_error("No user vars supplied",E_USER_WARNING);
+        return False;
+    }
+    if(!$vars['email']){
+        trigger_error("No email supplied",E_USER_WARNING);
+        return False;
+    }
+    $vars['email'] = self::validateEmail($vars['email']);
+
     Database::connectToMailingList();
     //check if exists
     $uuid = self::checkIfEmailExists($vars['email']);
     if($uuid === False){
         $uuid = self::createNewSubscriber($vars['email']);
     }
-    self::updateSubscriber($uuid,$vars);
+    return self::updateSubscriber($uuid,$vars);
 }
 
 private static function checkIfEmailExists($email){
@@ -341,6 +351,7 @@ private static function createNewSubscriber(){
 }
 
 private static function updateSubscriber($uuid,$vars){
+
     // get array of fields
     $sql = "SELECT * FROM `public` LIMIT 1";
     $r = Database::query($sql);
@@ -349,11 +360,15 @@ private static function updateSubscriber($uuid,$vars){
         $fields[] = $field->name;
     }
 
-    //encrypt fields
+//make object from vars
     $person = new Ent\Person;
     foreach($vars as $key => $value){
         $person->$key = $value;
     }
+
+
+
+    //encrypt fields
     $person = Encryptor::encodeObject($person);
 
     //build sql string
@@ -369,7 +384,22 @@ private static function updateSubscriber($uuid,$vars){
     $sql = "UPDATE `public` SET $sqlvar_string WHERE `uuid`='$uuid'";
     // print_r($sql);
 
-    return Database::query($sql);
+    if( Database::query($sql)){
+        return $person;
+    }else{
+        return False;
+    }
+}
+
+private function validateEmail($email){
+    //validate email
+        $email = filter_var($email, FILTER_SANITIZE_EMAIL);
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            throw new \Exception("User email not valid", 1);
+            return False;
+        }else{
+            return $email;
+        }
 }
 }
 ?>
