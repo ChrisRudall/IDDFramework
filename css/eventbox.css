@@ -114,38 +114,41 @@ and (max-width : 768px)
 		bottom:0px;
 		right:0px;
 		border-radius: 20px 00px 0px 0px;
+		max-width: 40%;
+		/*text-align: right;*/
 
 	}
-.eventboxtitle.mobile{
-float: none;
-clear:none;
-/*display: inline-block;*/
+	.eventboxtitle.mobile{
+	float: none;
+	clear:none;
+	/*max-width: 10%;*/
+	/*display: inline-block;*/
 	}
-.eventboximage{
-	height: 150px;
-}
-.eventboxtitle.mobile.feature{
-	position: absolute;
-	bottom: 50px;
-	left:0px;
-	/*border-radius: 0px 30px 30px 0px;*/
-	font-size: 24pt;
-	line-height: 10pt;
+	.eventboximage{
+		height: 150px;
+	}
+	.eventboxtitle.mobile.feature{
+		position: absolute;
+		bottom: 50px;
+		left:0px;
+		/*border-radius: 0px 30px 30px 0px;*/
+		font-size: 24pt;
+		line-height: 14pt;
 
-}
-.fadedtext.feature{
-    font-size: 12pt;
-	/*text-shadow: 0px 0px 0px rgba(0, 0, 0, 0.5);*/
-}
-.eventboxinfo.feature{
-	float: left;
-	font-size: 12pt
-}
-.tag.feature{
-	float: right;
-    clear:both;
-	display: none;
-}
+	}
+	.fadedtext.feature{
+	    font-size: 12pt;
+		/*text-shadow: 0px 0px 0px rgba(0, 0, 0, 0.5);*/
+	}
+	.eventboxinfo.feature{
+		float: left;
+		font-size: 12pt
+	}
+	.tag.feature{
+		float: right;
+	    clear:both;
+		display: none;
+	}
 
 
 }

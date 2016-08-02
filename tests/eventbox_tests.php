@@ -35,7 +35,7 @@ $eventbox->showtag = true;
 $eventbox->showAllRooms();
 // var_dump($eventbox);
 $eventbox = new IDD\Eventbox(8);
-// $eventbox->room_offset = 0;
+$eventbox->room_offset = 1;
 $eventbox->showtag = true;
 // $eventbox->height = 200;
 // $eventbox->feature = True;

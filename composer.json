@@ -4,5 +4,8 @@
         "psr-0" : {
             "InDemandDigital\\IDDFramework" : "src"
         }
-    }
+    },
+    "require": {
+        "defuse/php-encryption": "dev-master"
+        }
 }

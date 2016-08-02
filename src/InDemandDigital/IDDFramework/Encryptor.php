@@ -1,11 +1,11 @@
 <?php
 namespace InDemandDigital\IDDFramework;
-use \Defuse\Crypto\Crypto;
-use \Defuse\Crypto\Key;
+use Defuse\Crypto\Crypto;
+use Defuse\Crypto\Key;
 
 class Encryptor{
     private static $key;
-    const keypath = "../key/key.key";
+    const keypath = "/Library/WebServer/Documents/IDDFramework/key.key";
     private static $encrypted_tables = [
         'Artist'=>
                             ['email',
@@ -19,6 +19,9 @@ class Encryptor{
                             'check_in',
                             'check_out',
                             'notes']
+                            ,
+        'Person' =>
+                            ['name','firstname','lastname','email','dob','address','postcode','mobile','facebook']
 
     ];
 
@@ -35,83 +38,107 @@ private function getKey(){
 
 //ENCODE FUNCTION
 public function encode($data){
-	try {
-        if(!isset(self::$key)){
-            self::getKey();
-        }
-        $data = Crypto::encrypt($data, self::$key);
-    }
-	catch (Exception $e) {
-        die("Encrytion Failed: $e");
-    }
-	return base64_encode($data);
+    $e_data['data'] = self::v2Encode($data);
+    $e_data['encoding_version'] = 2;
+    return $e_data;
 }
 
 
 //DECODE FUNCTION
 public function decode($data){
-	if($data){
-        $data = base64_decode($data);
 
-        try {
-            if(!isset(self::$key)){
-                self::getKey();
-            }
-            $data = Crypto::decrypt($data,self::$key);
+try{
+        $data = self::v2Decode($data);
+    }catch(\Exception $e){
+        try{
+            $data = self::v1Decode($data);
+        }catch(\Exception $e){
+            trigger_error("Could not decode with v1 or v2", E_USER_WARNING);
+            return False;
         }
-    	catch (Ex\InvalidCiphertextException $ex){
-            die('DANGER! DANGER! The ciphertext has been tampered with!');
-        }
-    	catch (Ex\CryptoTestFailedException $ex){
-            die('Cannot safely perform decryption');
-        }
-    	catch (Ex\CannotPerformOperationException $ex){
-            die('Cannot safely perform decryption');
-        }
-    	catch (Exception $e){
-            $data = "********";
-        }
-    }else{
-        $data = NULL;
     }
     return $data;
 }
 
-// check for type
-// function decodeArray($array){
-//     for($c=0;$c<count($array);$c++){
-//         self::decodeObject($array[$c]);
-//         }
-//     return $array;
-// }
 
-// data type check doesnt work
-function decodeObject($object){
 
-    // var_dump($object);
-    // foreach($object as $key => $value){
-    //         if (substr($value, -1) == "="){
-    //             $value = self::decode($value);
-    //         }
-    //         $object->$key = $value;
-    //     }
-        return $object;
-}
-
-function legacyDecodeObject($object){
+public function decodeObject($object){
     $entity_type = end(explode('\\', get_class($object)));
     if (!self::$encrypted_tables[$entity_type]){
         return $object;
     }
     foreach($object as $key => $value){
-
             if (in_array($key,self::$encrypted_tables[$entity_type])){
-                $value = \v1\decode($value);
+                $d = self::decode($value);
+                if($d === False){
+                    throw new \Exception("Decryption failed", 1);
+                }else{
+                    $object->$key = self::decode($value);
+                }
+            }
+        }
+    return $object;
+}
+
+public function encodeObject($object){
+    $entity_type = end(explode('\\', get_class($object)));
+    if (!self::$encrypted_tables[$entity_type]){
+        return $object;
+    }
+    foreach($object as $key => $value){
+            if (in_array($key,self::$encrypted_tables[$entity_type])){
+                $value = self::v2Encode($value);
             }
             $object->$key = $value;
         }
     return $object;
 }
 
+
+
+
+
+private function v1Decode($data){
+	$key = file_get_contents('/Library/WebServer/Documents/IDDFramework/x040.txt');
+
+    	if($data){
+            $data = base64_decode($data);
+
+            try {$data = Crypto::legacyDecrypt($data,$key);}
+        	catch (Ex\InvalidCiphertextException $ex)
+        		{die('DANGER! DANGER! The ciphertext has been tampered with!');}
+        	catch (Ex\CryptoTestFailedException $ex)
+        		{die('Cannot safely perform decryption');}
+        	catch (Ex\CannotPerformOperationException $ex)
+        		{die('Cannot safely perform decryption');}
+        	catch (Exception $e)
+        		{$data = "********";}
+        }else{$data = NULL;}
+
+        return $data;
+    }
+
+private function v2Decode($data){
+        $data = base64_decode($data);
+        if(!isset(self::$key)){
+            self::getKey();
+        }
+
+        try{
+            $d = Crypto::decrypt($data,self::$key);
+        }
+        catch(\Defuse\Crypto\Exception\WrongKeyOrModifiedCiphertextException $e){
+            throw new \Exception("v2 Decryption Not Succesful");
+        }
+    return $data;
+}
+
+private function v2Encode($data){
+        if(!isset(self::$key)){
+            self::getKey();
+        }
+        $data = Crypto::encrypt($data, self::$key);
+        return base64_encode($data);
+}
 }
 ?>

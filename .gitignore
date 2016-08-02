@@ -1,2 +1,10 @@
 
 composer.phar
+
+x040.txt
+
+key.key
+
+*.lock
+
+vendor

@@ -1,5 +1,6 @@
 <?php
 namespace InDemandDigital\IDDFramework;
+use InDemandDigital\IDDFramework\Entities AS Ent;
 
 class Mail{
     const unsubscribeUrl = "http://listmanager.indemandmusic.com/unsubscribe.php?mailshot_id=##mailshot_id##&uuid=##UUID##";
@@ -295,6 +296,79 @@ public static function unsubscribe($person,$shot){
     $shortcode = $sender->shortcode . "_optout";
     $sql = "UPDATE $list->listname SET `$shortcode`='1' WHERE `uuid`='$person->uuid'";
     // print_r($sql);
+    return Database::query($sql);
+}
+
+
+//add new subscriber
+public static function addSubscriber($vars){
+    Database::connectToMailingList();
+    //check if exists
+    $uuid = self::checkIfEmailExists($vars['email']);
+    if($uuid === False){
+        $uuid = self::createNewSubscriber($vars['email']);
+    }
+    self::updateSubscriber($uuid,$vars);
+}
+
+private static function checkIfEmailExists($email){
+    $email = strtolower($email);
+    $sql = "SELECT email,uuid,encoding_version FROM public";
+    $rs = Database::query($sql);
+
+    while($person = $rs->fetch_object('\InDemandDigital\IDDFramework\Entities\Person')){
+        try{
+            $person = Encryptor::decodeObject($person);
+        }catch(\Exception $e){
+            trigger_error("Decryption failed for person: <br>",E_USER_WARNING);
+            var_dump($person);
+        }
+        $person->email = strtolower($person->email);
+        $emails[$person->uuid] = $person->email;
+    }
+    return array_search($email,$emails);
+}
+
+private static function createNewSubscriber(){
+    $uuid = uuid::generate(4,101,$email);
+    $sql = "INSERT INTO public (uuid) VALUES ('$uuid')";
+    $response = Database::query($sql);
+    if ($response == TRUE){
+        return $uuid;
+    }else{
+        return $response;
+    }
+}
+
+private static function updateSubscriber($uuid,$vars){
+    // get array of fields
+    $sql = "SELECT * FROM `public` LIMIT 1";
+    $r = Database::query($sql);
+    $fields = $r->fetch_fields();
+    foreach($fields as $field ){
+        $fields[] = $field->name;
+    }
+
+    //encrypt fields
+    $person = new Ent\Person;
+    foreach($vars as $key => $value){
+        $person->$key = $value;
+    }
+    $person = Encryptor::encodeObject($person);
+
+    //build sql string
+    foreach($vars as $key => $value){
+        if(in_array($key,$fields)){
+            $sqlvar_array[] = "`$key`='{$person->$key}'";
+        }else{
+            trigger_error("Var '$key' not a valid database field", E_USER_WARNING);
+        }
+        $sqlvar_array[] = "`ip`='{$_SERVER['REMOTE_ADDR']}'";
+    }
+    $sqlvar_string = implode(',',$sqlvar_array);
+    $sql = "UPDATE `public` SET $sqlvar_string WHERE `uuid`='$uuid'";
+    // print_r($sql);
+
     return Database::query($sql);
 }
 }
