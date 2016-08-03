@@ -12,7 +12,7 @@ use Defuse\Crypto\Crypto;
 use Defuse\Crypto\Key;
 
 
-$vars = ['email' => 'steve@indemandmusic.com'];
+$vars = ['email' => 'seve@indemandmusic.com'];
 
 var_dump( IDD\Mail::addSubscriber($vars));
 

@@ -341,7 +341,7 @@ private static function checkIfEmailExists($email){
 
 private static function createNewSubscriber($email){
     $uuid = uuid::generate(4,101,$email);
-    $sql = "INSERT INTO public (uuid) VALUES ('$uuid')";
+    $sql = "INSERT INTO `public` (uuid) VALUES ('$uuid')";
     $response = Database::query($sql);
     if ($response == TRUE){
         return $uuid;
