@@ -7,7 +7,7 @@ Date_default_timezone_set('UTC');
 require $_SERVER['DOCUMENT_ROOT']."/vendor/autoload.php";
 
 if(!$_GET['email'] && !$_POST['email']){
-    echo "Please enter your email address";
+    echo "0Please enter your email address";
 }else{
     try{
         if($_GET){
@@ -16,11 +16,11 @@ if(!$_GET['email'] && !$_POST['email']){
         if($_POST){
             $person = Mail::addSubscriber($_POST);
         }
-        echo $person->email . " has been added succesfully, please check your email!";
+        echo "1".$person->email . " has been added succesfully, please check your email!";
         // echo "Success! $person->email has been added";
         //send confirmation? - not if added via booking form etc - in fact, send confirmation via ajax
     }catch(\Exception $e){
-        echo "Please check you entered a valid email address!";
+        echo "0Please check you entered a valid email address!";
     }
 }
 ?>
