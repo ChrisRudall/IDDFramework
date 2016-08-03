@@ -323,7 +323,7 @@ public static function addSubscriber($vars){
 
 private static function checkIfEmailExists($email){
     $email = strtolower($email);
-    $sql = "SELECT email,uuid,encoding_version FROM public";
+    $sql = "SELECT email,uuid FROM public";
     $rs = Database::query($sql);
 
     while($person = $rs->fetch_object('\InDemandDigital\IDDFramework\Entities\Person')){
