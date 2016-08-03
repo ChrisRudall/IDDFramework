@@ -25,7 +25,7 @@ $e->uuid = $person['uuid'];
 $e->mailshot_id = $shot->mailshot_id;
 $e->send_date = $shot->send_date;
 
-var_dump($e);
+// var_dump($e);
 $e->queue();
 
 

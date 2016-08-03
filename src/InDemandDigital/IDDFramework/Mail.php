@@ -153,6 +153,9 @@ public static function sendBottles($i,$to){
 public function replaceTags(){
     $this->html = str_replace("##greeting##",$this->greeting,$this->html);
     $this->html = str_replace("##unsubscribe##",$this->unsubscribeUrl,$this->html);
+    $this->html = str_replace("##email##",$this->recipient->email,$this->html);
+    $this->html = str_replace("##sender##",$this->sender->name,$this->html);
+
 }
 
 public function setTemplates(){
