@@ -3,9 +3,16 @@ namespace InDemandDigital\IDDFramework;
 use Defuse\Crypto\Crypto;
 use Defuse\Crypto\Key;
 
+
 class Encryptor{
     private static $key;
-    const keypath = "/Library/WebServer/Documents/IDDFramework/key.key";
+    private static $keyV1;
+
+    const keypath = "/keys/key.key";
+    const keypathv1 = "/keys/x040.txt";
+    const keypathv1_1 = "/keys/k1.txt";
+    const keypathv1_2 = "/keys/k2.txt";
+
     private static $encrypted_tables = [
         'Artist'=>
                             ['email',
@@ -25,6 +32,10 @@ class Encryptor{
 
     ];
 
+
+
+
+
 public function makeNewKey(){
     $key = Key::createNewRandomKey();
     echo $key->saveToAsciiSafeString();
@@ -32,21 +43,26 @@ public function makeNewKey(){
 }
 
 private function getKey(){
-    $keystring = file_get_contents(self::keypath);
-    self::$key = Key::loadFromAsciiSafeString($keystring);
-}
 
-//ENCODE FUNCTION
-public function encode($data){
-    $e_data['data'] = self::v2Encode($data);
-    $e_data['encoding_version'] = 2;
-    return $e_data;
+    if(debug_backtrace()[1]['function'] == 'v1Decode'){
+        $k1 = file_get_contents($_SERVER['DOCUMENT_ROOT'].self::keypathv1_1);
+        $k2 = file_get_contents($_SERVER['DOCUMENT_ROOT'].self::keypathv1_2);
+        if(!$k1 || !$k2){
+            die("v1 Key not found");
+        }else{
+            self::$keyV1 = $k1 ^ $k2;
+        }
+    }else{
+        $keystring = file_get_contents($_SERVER['DOCUMENT_ROOT'].self::keypath);
+        if(!$keystring){
+            die("v2 Key not found");
+        }
+        self::$key = Key::loadFromAsciiSafeString($keystring);
+    }
 }
-
 
 //DECODE FUNCTION
 public function decode($data){
-
 try{
         $data = self::v2Decode($data);
     }catch(\Exception $e){
@@ -87,7 +103,7 @@ public function encodeObject($object){
     }
     foreach($object as $key => $value){
             if (in_array($key,self::$encrypted_tables[$entity_type])){
-                $value = self::v2Encode($value);
+                $value = self::encode($value);
             }
             $object->$key = $value;
         }
@@ -99,12 +115,14 @@ public function encodeObject($object){
 
 
 private function v1Decode($data){
-	$key = file_get_contents('/Library/WebServer/Documents/IDDFramework/x040.txt');
+    if(!isset(self::$keyV1)){
+        self::getKey();
+    }
 
     	if($data){
             $data = base64_decode($data);
 
-            try {$data = Crypto::legacyDecrypt($data,$key);}
+            try {$data = Crypto::legacyDecrypt($data,self::$keyV1);}
         	catch (Ex\InvalidCiphertextException $ex)
         		{die('DANGER! DANGER! The ciphertext has been tampered with!');}
         	catch (Ex\CryptoTestFailedException $ex)
@@ -133,7 +151,7 @@ private function v2Decode($data){
     return $data;
 }
 
-private function v2Encode($data){
+private function encode($data){
         if(!isset(self::$key)){
             self::getKey();
         }

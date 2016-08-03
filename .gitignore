@@ -1,9 +1,7 @@
 
 composer.phar
 
-x040.txt
-
-key.key
+keys
 
 *.lock
 
