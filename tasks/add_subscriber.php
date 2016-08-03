@@ -16,7 +16,7 @@ if(!$_GET['email'] && !$_POST['email']){
         if($_POST){
             $person = Mail::addSubscriber($_POST);
         }
-        echo $person->email;
+        echo $person->email . " has been added succesfully, please check your email!";
         // echo "Success! $person->email has been added";
         //send confirmation? - not if added via booking form etc - in fact, send confirmation via ajax
     }catch(\Exception $e){
