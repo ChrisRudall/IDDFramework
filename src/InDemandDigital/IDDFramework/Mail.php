@@ -365,16 +365,14 @@ private static function updateSubscriber($uuid,$vars){
     foreach($vars as $key => $value){
         $person->$key = $value;
     }
-
-
-
+    $personplain = clone $person;
     //encrypt fields
-    $person_e = Encryptor::encodeObject($person);
+    Encryptor::encodeObject($person);
 
     //build sql string
     foreach($vars as $key => $value){
         if(in_array($key,$fields)){
-            $sqlvar_array[] = "`$key`='{$person_e->$key}'";
+            $sqlvar_array[] = "`$key`='{$person->$key}'";
         }else{
             trigger_error("Var '$key' not a valid database field", E_USER_WARNING);
         }
@@ -385,7 +383,7 @@ private static function updateSubscriber($uuid,$vars){
     // print_r($sql);
 
     if( Database::query($sql)){
-        return $person;
+        return $personplain;
     }else{
         return False;
     }
