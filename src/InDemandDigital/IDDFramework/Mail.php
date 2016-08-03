@@ -207,7 +207,7 @@ public static function sendQueue($c){
 
 private static function log($text){
     if (self::$logfile === None){
-        self::$logfile = fopen("data/logs/mailer.txt",'a') or die("Unable to open file!");
+        self::$logfile = fopen($_SERVER['DOCUMENT_ROOT']."/data/logs/mailer.txt",'a') or die("Unable to open file!");
     }
     $now = new \DateTime();
     $logtext = $now->format('c') ."    ". $text."\n";
