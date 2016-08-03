@@ -148,7 +148,7 @@ private function v2Decode($data){
         catch(\Defuse\Crypto\Exception\WrongKeyOrModifiedCiphertextException $e){
             throw new \Exception("v2 Decryption Not Succesful");
         }
-    return $data;
+    return $d;
 }
 
 private function encode($data){
