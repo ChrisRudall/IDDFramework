@@ -369,12 +369,12 @@ private static function updateSubscriber($uuid,$vars){
 
 
     //encrypt fields
-    $person = Encryptor::encodeObject($person);
+    $person_e = Encryptor::encodeObject($person);
 
     //build sql string
     foreach($vars as $key => $value){
         if(in_array($key,$fields)){
-            $sqlvar_array[] = "`$key`='{$person->$key}'";
+            $sqlvar_array[] = "`$key`='{$person_e->$key}'";
         }else{
             trigger_error("Var '$key' not a valid database field", E_USER_WARNING);
         }
