@@ -339,7 +339,7 @@ private static function checkIfEmailExists($email){
     return array_search($email,$emails);
 }
 
-private static function createNewSubscriber(){
+private static function createNewSubscriber($email){
     $uuid = uuid::generate(4,101,$email);
     $sql = "INSERT INTO public (uuid) VALUES ('$uuid')";
     $response = Database::query($sql);
@@ -380,9 +380,9 @@ private static function updateSubscriber($uuid,$vars){
     }
     $sqlvar_string = implode(',',$sqlvar_array);
     $sql = "UPDATE `public` SET $sqlvar_string WHERE `uuid`='$uuid'";
-    // print_r($sql);
 
     if( Database::query($sql)){
+        $personplain->uuid = $uuid;
         return $personplain;
     }else{
         return False;
