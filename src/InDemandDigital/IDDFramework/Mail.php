@@ -159,8 +159,13 @@ public function replaceTags(){
 }
 
 public function setTemplates(){
-    $this->bodytext = file_get_contents($_SERVER['DOCUMENT_ROOT']."/templates/". $this->shot->mailshot_id . ".txt",TRUE);
-    $this->bodyhtml = file_get_contents($_SERVER['DOCUMENT_ROOT']."/templates/". $this->shot->mailshot_id . ".htm",TRUE);
+    if(PHP_SAPI == "cli"){
+        $this->bodytext = file_get_contents("http://portal.indemandmusic.com/templates/". $this->shot->mailshot_id . ".txt",TRUE);
+        $this->bodyhtml = file_get_contents("http://portal.indemandmusic.com/templates/". $this->shot->mailshot_id . ".htm",TRUE);
+    }else{
+        $this->bodytext = file_get_contents($_SERVER['DOCUMENT_ROOT']."/templates/". $this->shot->mailshot_id . ".txt",TRUE);
+        $this->bodyhtml = file_get_contents($_SERVER['DOCUMENT_ROOT']."/templates/". $this->shot->mailshot_id . ".htm",TRUE);
+    }
 }
 
 public static function sendQueue($c){
