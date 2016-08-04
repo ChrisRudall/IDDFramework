@@ -1,8 +1,9 @@
 <?php
 namespace InDemandDigital\IDDFramework;
-use Defuse\Crypto\Crypto;
-use Defuse\Crypto\Key;
-
+// use Defuse\Crypto\Crypto;
+// use Defuse\Crypto\Key;
+use \InDemandDigital\IDDFramework\Crypto;
+use \InDemandDigital\IDDFramework\Crypto\Exception as Ex;
 
 class Encryptor{
     private static $key;
@@ -44,7 +45,22 @@ public function makeNewKey(){
 
 private function getKey(){
 
-    if(debug_backtrace()[1]['function'] == 'v1Decode'){
+    // if(debug_backtrace()[1]['function'] == 'v1Decode'){
+    //     $k1 = file_get_contents($_SERVER['DOCUMENT_ROOT'].self::keypathv1_1);
+    //     $k2 = file_get_contents($_SERVER['DOCUMENT_ROOT'].self::keypathv1_2);
+    //     if(!$k1 || !$k2){
+    //         die("v1 Key not found");
+    //     }else{
+    //         self::$keyV1 = $k1 ^ $k2;
+    //     }
+    // }else{
+    //     $keystring = file_get_contents($_SERVER['DOCUMENT_ROOT'].self::keypath);
+    //     if(!$keystring){
+    //         die("v2 Key not found");
+    //     }
+    //     self::$key = Key::loadFromAsciiSafeString($keystring);
+    // }
+
         $k1 = file_get_contents($_SERVER['DOCUMENT_ROOT'].self::keypathv1_1);
         $k2 = file_get_contents($_SERVER['DOCUMENT_ROOT'].self::keypathv1_2);
         if(!$k1 || !$k2){
@@ -52,13 +68,6 @@ private function getKey(){
         }else{
             self::$keyV1 = $k1 ^ $k2;
         }
-    }else{
-        $keystring = file_get_contents($_SERVER['DOCUMENT_ROOT'].self::keypath);
-        if(!$keystring){
-            die("v2 Key not found");
-        }
-        self::$key = Key::loadFromAsciiSafeString($keystring);
-    }
 }
 
 //DECODE FUNCTION
@@ -122,13 +131,13 @@ private function v1Decode($data){
     	if($data){
             $data = base64_decode($data);
 
-            try {$data = Crypto::legacyDecrypt($data,self::$keyV1);}
+            try {$data = Crypto\Crypto::Decrypt($data,self::$keyV1);}
         	catch (Ex\InvalidCiphertextException $ex)
-        		{die('DANGER! DANGER! The ciphertext has been tampered with!');}
+        		{trigger_error('DANGER! DANGER! The ciphertext has been tampered with!',E_USER_WARNING);}
         	catch (Ex\CryptoTestFailedException $ex)
-        		{die('Cannot safely perform decryption');}
+        		{trigger_error('Cannot safely perform decryption',E_USER_WARNING);}
         	catch (Ex\CannotPerformOperationException $ex)
-        		{die('Cannot safely perform decryption');}
+        		{trigger_error('Cannot safely perform decryption',E_USER_WARNING);}
         	catch (Exception $e)
         		{$data = "********";}
         }else{$data = NULL;}
@@ -137,6 +146,7 @@ private function v1Decode($data){
     }
 
 private function v2Decode($data){
+    throw new \Exception("v2 Decryption Not Active");
         $data = base64_decode($data);
         if(!isset(self::$key)){
             self::getKey();
@@ -152,10 +162,19 @@ private function v2Decode($data){
 }
 
 private function encode($data){
-        if(!isset(self::$key)){
+        if(!isset(self::$keyV1)){
             self::getKey();
         }
-        $data = Crypto::encrypt($data, self::$key);
+        // $data = Crypto::encrypt($data, self::$key);
+        try {
+            $data = Crypto\Crypto::Encrypt($data, self::$keyV1);
+        } catch (CryptoTestFailedException $ex) {
+            die('Cannot safely perform encryption');
+        } catch (CannotPerformOperationException $ex) {
+            die('Cannot safely perform decryption');
+        }
+
+
         return base64_encode($data);
 }
 }
