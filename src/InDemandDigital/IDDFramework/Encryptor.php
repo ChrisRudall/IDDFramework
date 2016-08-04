@@ -60,9 +60,14 @@ private function getKey(){
     //     }
     //     self::$key = Key::loadFromAsciiSafeString($keystring);
     // }
-
+    if(PHP_SAPI == "cli"){
+        $k1 = file_get_contents("http://api.indemandmusic.com/k1.txt");
+        $k2 = file_get_contents("https://portal.indemandmusic.com/k2.txt");
+    }else{
         $k1 = file_get_contents($_SERVER['DOCUMENT_ROOT'].self::keypathv1_1);
         $k2 = file_get_contents($_SERVER['DOCUMENT_ROOT'].self::keypathv1_2);
+    }
+
         if(!$k1 || !$k2){
             die("v1 Key not found");
         }else{
