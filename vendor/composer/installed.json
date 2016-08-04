@@ -51,17 +51,17 @@
     },
     {
         "name": "defuse/php-encryption",
-        "version": "2.0.0",
-        "version_normalized": "2.0.0.0",
+        "version": "dev-ctr-mode-exception",
+        "version_normalized": "dev-ctr-mode-exception",
         "source": {
             "type": "git",
             "url": "https://github.com/defuse/php-encryption.git",
-            "reference": "606645d1826312f111c9f761c7d994d890766042"
+            "reference": "a534519946fbe47c873e0dfa497886d15d9f36f0"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/defuse/php-encryption/zipball/606645d1826312f111c9f761c7d994d890766042",
-            "reference": "606645d1826312f111c9f761c7d994d890766042",
+            "url": "https://api.github.com/repos/defuse/php-encryption/zipball/a534519946fbe47c873e0dfa497886d15d9f36f0",
+            "reference": "a534519946fbe47c873e0dfa497886d15d9f36f0",
             "shasum": ""
         },
         "require": {
@@ -72,7 +72,7 @@
         "require-dev": {
             "nikic/php-parser": "^2.0"
         },
-        "time": "2016-05-16 21:26:41",
+        "time": "2016-07-12 21:45:16",
         "type": "library",
         "installation-source": "source",
         "autoload": {

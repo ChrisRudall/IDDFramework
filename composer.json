@@ -6,6 +6,6 @@
         }
     },
     "require": {
-        "defuse/php-encryption": "2.0.0"
+        "defuse/php-encryption": "dev-ctr-mode-exception"
         }
 }
