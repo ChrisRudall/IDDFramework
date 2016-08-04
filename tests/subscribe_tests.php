@@ -12,7 +12,9 @@ use \InDemandDigital\IDDFramework\Crypto;
 use \InDemandDigital\IDDFramework\Crypto\Exception as Ex;
 
 
-$vars = ['email' => 'steve@indemandmusic.com'];
-var_dump( IDD\Mail::addSubscriber($vars));
+// $vars = ['email' => 'chris@indemandmusic.com'];
+// var_dump( IDD\Mail::addSubscriber($vars));
+IDD\Database::connectToMailingList();
+IDD\Mail::sendqueue(1);
 
  ?>

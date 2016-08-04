@@ -159,8 +159,8 @@ public function replaceTags(){
 }
 
 public function setTemplates(){
-    $this->bodytext = file_get_contents("templates/". $this->shot->mailshot_id . ".txt",TRUE);
-    $this->bodyhtml = file_get_contents("templates/". $this->shot->mailshot_id . ".htm",TRUE);
+    $this->bodytext = file_get_contents($_SERVER['DOCUMENT_ROOT']."/templates/". $this->shot->mailshot_id . ".txt",TRUE);
+    $this->bodyhtml = file_get_contents($_SERVER['DOCUMENT_ROOT']."/templates/". $this->shot->mailshot_id . ".htm",TRUE);
 }
 
 public static function sendQueue($c){
@@ -209,14 +209,18 @@ public static function sendQueue($c){
 }
 
 private static function log($text){
+    try{
     if (self::$logfile === None){
-        self::$logfile = fopen($_SERVER['DOCUMENT_ROOT']."/data/logs/mailer.txt",'a') or die("Unable to open file!");
+        self::$logfile = fopen($_SERVER['DOCUMENT_ROOT']."/data/logs/mailer.txt",'a');
     }
     $now = new \DateTime();
     $logtext = $now->format('c') ."    ". $text."\n";
     fwrite(self::$logfile,$logtext);
-
 }
+catch(\Exception $e)
+{
+    print_r("Logging failed");
+}}
 
 public static function clearQueue(){
     self::dropQueueTable();
@@ -284,8 +288,8 @@ private static function setOptions(){
     }
 }
 public function legacyDecode(){
-    $this->recipient->email = \v1\decode($this->recipient->email);
-    $this->recipient->name = \v1\decode($this->recipient->name);
+    $this->recipient->email = Encryptor::decode($this->recipient->email);
+    $this->recipient->name = Encryptor::decode($this->recipient->name);
 }
 
 private function incrementShotCount(){
