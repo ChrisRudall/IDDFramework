@@ -12,8 +12,12 @@ use Defuse\Crypto\Crypto;
 use Defuse\Crypto\Key;
 
 
-$vars = ['email' => 'seve@indemandmusic.com'];
-
-var_dump( IDD\Mail::addSubscriber($vars));
+// $vars = ['email' => 'steve@indemandmusic.com'];
+var_dump(phpversion());
+// var_dump( IDD\Mail::addSubscriber($vars));
+$d = 'hello';
+$key = Key::createNewRandomKey();
+$e = Crypto::encrypt($d,$key);
+echo Crypto::decrypt($e,$key);
 
  ?>

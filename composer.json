@@ -6,6 +6,6 @@
         }
     },
     "require": {
-        "defuse/php-encryption": "dev-master"
+        "defuse/php-encryption": "2.0.0"
         }
 }
