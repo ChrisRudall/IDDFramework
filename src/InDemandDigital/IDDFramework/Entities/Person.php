@@ -4,8 +4,10 @@ use InDemandDigital\IDDFramework as IDD;
 
 class Person extends Entity{
 
-    public function __construct(){
-        trigger_error("Please use custom function to create a person",E_USER_ERROR);
+    public function __construct($i){
+        if($i){
+            trigger_error("Please use custom function to create a person",E_USER_ERROR);
+        }
     }
 
     public static function getPersonForUUID($uuid){
