@@ -18,6 +18,7 @@ class Mail{
     public static $template_subject;
     public static $template_unsubscribeurl;
     public static $senddate;
+    public static $body; // use for sending with mail client
 
     public  $to_address = "Default to";
     public  $to_name = "";
@@ -410,6 +411,11 @@ private function validateEmail($email){
         }else{
             return $email;
         }
+}
+
+public function sendWithMailClient(){
+    $link = "mailto:" . $this->to_address . "?subject=" . $this->subject . "&body=" . $this->body;
+    header ("Location: $link");
 }
 }
 ?>
