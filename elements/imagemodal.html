@@ -1,0 +1,38 @@
+<!-- include this file and add enable-modal class to images -->
+
+<div class="modal fade" tabindex="-1" role="dialog" id='imagemodal'>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <img class='img-responsive' src='' id='imagemodalimage' onclick='closeImageModal()'>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<script>
+var enable_modal = document.getElementsByClassName("enable-modal");
+
+var showImageModal = function() {
+    var image = this.getAttribute("src");
+    document.getElementById('imagemodalimage').src = image;
+    $('#imagemodal').modal('show');
+};
+
+for (var i = 0; i < enable_modal.length; i++) {
+    enable_modal[i].addEventListener('click', showImageModal, false);
+}
+
+
+function closeImageModal(){
+    $('#imagemodal').modal('hide')
+}
+
+
+$('#imagemodal').on('show.bs.modal', function (e) {
+  $('#navbar').collapse('hide');
+})
+</script>
