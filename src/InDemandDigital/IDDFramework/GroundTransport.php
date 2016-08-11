@@ -144,7 +144,7 @@ public static function calculateScheduleForEventID($event_id){
             }
             //assign best fit
             //selects best fit job
-            $sql = "SELECT * FROM shifts_temp WHERE available_time<'$job->pickup_time_str' AND stop_time>'$job->arrival_time_str' AND `would_have_to_leave_at`>`available_time` AND `make_available`='1' ORDER BY would_have_to_leave_at DESC";
+            $sql = "SELECT * FROM shifts_temp WHERE available_time<='$job->pickup_time_str' AND stop_time>'$job->arrival_time_str' AND `would_have_to_leave_at`>=`available_time` AND `make_available`='1' ORDER BY would_have_to_leave_at DESC";
             $rs = Database::query($sql);
             $job->assigned_shift = $rs->fetch_object('InDemandDigital\IDDFramework\Entities\Shift');
             // run success
@@ -264,6 +264,7 @@ private function shiftAssignSuccess($job){
     self::myLog("Success - assigned job ".$job->id);
     //update job in db
     $sql = "UPDATE `gt_jobs` SET `assigned_shift`='{$job->assigned_shift->id}' WHERE `id`='$job->id'";
+    // print_r($sql);
     Database::query($sql);
 
     //update shift in temp db

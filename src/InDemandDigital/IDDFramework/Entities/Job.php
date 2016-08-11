@@ -58,6 +58,7 @@ class Job extends Entity{
 }
 
     public static function echoJobsForShift($shift){
+        // var_dump($shift);
         //driver details
         // $sql = "SELECT driver_id FROM `gt_shifts` WHERE gt_shifts.id='$shift'";
         // $result = IDD\Database::query($sql);
