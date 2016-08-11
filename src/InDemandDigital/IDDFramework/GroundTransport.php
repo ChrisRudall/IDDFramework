@@ -22,7 +22,7 @@ private static function addDriver($job,$id = None){
         print_r("Trying to add driver id ".$id);print_r("<br>");
         $sql = "SELECT * FROM `gt_shifts` WHERE `start_time`<'$job->pickup_time_str' AND `stop_time`>'$job->arrival_time_str' AND `id`='$id'";
     }else{
-        $sql = "SELECT * FROM `gt_shifts` WHERE `start_time`<'$job->pickup_time_str' AND `stop_time`>'$job->arrival_time_str'";
+        $sql = "SELECT * FROM `gt_shifts` WHERE `start_time`<'$job->pickup_time_str' AND `stop_time`>'$job->arrival_time_str' AND `make_available`='1'";
     }
 // var_dump($sql);
 // print_r($forjob->pickup_time);
