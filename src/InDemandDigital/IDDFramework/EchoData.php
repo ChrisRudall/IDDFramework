@@ -32,12 +32,18 @@ class EchoData{
             $fields = array_keys($array);
             foreach ($fields as $field) {
                 echo "<td>";
+                if($object->$field == "Undefined"){
+                    $object->$field = "";
+                }
                 echo $object->$field;
                 echo "</td>";
             }
         }else{
             foreach ($fields as $field => $displaytext) {
                 echo "<td>";
+                if($object->$field == "Undefined"){
+                    $object->$field = "";
+                }
                 echo $object->$field;
                 echo "</td>";
             }
@@ -114,7 +120,6 @@ eventname,roomname,artistname";
         $r = Database::query($sql);
 
         echo "<select name='$key'>";
-        echo "<option id='NULL' value='None'></option>";
         for ($f=0;$f<$r->num_rows;++$f){
             $perf = $r->fetch_object();
             $selected = "";
