@@ -37,7 +37,7 @@ private static function addDriver($job,$id = None){
             $logtext = sprintf("    Adding new driver# %s (%s %s)\n",$shift->id,$driver->firstname,$driver->lastname);
             print_r("adding new driver<br>");
             fwrite(self::$logfile,$logtext);
-            $sql = "INSERT INTO shifts_temp (`id`,`available_time`,`stop_time`) VALUES ('$shift->id','$shift->start_time','$shift->stop_time')";
+            $sql = "INSERT INTO shifts_temp (`id`,`available_time`,`stop_time`,`make_available`) VALUES ('$shift->id','$shift->start_time','$shift->stop_time','$shift->make_available')";
             Database::query($sql);
             self::$drivers_added++;
             return $shift;
@@ -290,7 +290,7 @@ private static function createTempTable(){
     $sql = "DROP TABLE shifts_temp";
     Database::query($sql);
 
-    $sql = "CREATE TABLE shifts_temp (id int(11) unsigned NOT NULL AUTO_INCREMENT,available_time DateTime,previous_available_time DateTime,stop_time datetime,current_location int(2) DEFAULT 11,would_have_to_leave_at datetime,PRIMARY KEY (`id`)) ENGINE=MEMORY";
+    $sql = "CREATE TABLE shifts_temp (id int(11) unsigned NOT NULL AUTO_INCREMENT,available_time DateTime,previous_available_time DateTime,stop_time datetime,current_location int(2) DEFAULT 11,would_have_to_leave_at datetime,make_available int(1),PRIMARY KEY (`id`)) ENGINE=MEMORY";
     Database::query($sql);
 }
 
