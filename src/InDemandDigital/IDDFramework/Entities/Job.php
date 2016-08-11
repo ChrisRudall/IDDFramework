@@ -59,13 +59,15 @@ class Job extends Entity{
 
     public static function echoJobsForShift($shift){
         //driver details
-        $sql = "SELECT driver_id FROM `gt_shifts` WHERE gt_shifts.id='$shift'";
-        $result = IDD\Database::query($sql);
-        if($result->num_rows == 0){
-            return;
-        }
-        $driver = new StaffMember($result->fetch_object()->driver_id);
-        printf("Schedule for driver (ShiftID#%s) - %s %s (%s)",$shift,$driver->firstname, $driver->lastname,$shift->notes);
+        // $sql = "SELECT driver_id FROM `gt_shifts` WHERE gt_shifts.id='$shift'";
+        // $result = IDD\Database::query($sql);
+        // if($result->num_rows == 0){
+        //     return;
+        // }
+
+        $shift = new Shift($shift);
+        $driver = new StaffMember($shift->driver_id);
+        printf("Schedule for driver (ShiftID#%s) - %s %s (%s)",$shift,$driver->firstname, $driver->lastname,$shift_obj->notes);
 
         //job details
         // $sql = "SELECT * FROM `gt_jobs` WHERE `assigned_shift`='$shift' ORDER BY `pickup_time`";
