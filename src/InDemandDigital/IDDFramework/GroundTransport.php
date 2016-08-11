@@ -250,7 +250,7 @@ public static function calculateScheduleForEventID($event_id){
     fclose(self::$logfile);
     print_r($logtext);
     //drop temp table
-    // $sql = "DROP TABLE shifts_temp";
+    $sql = "DROP TABLE shifts_temp";
     Database::query($sql);
 
 }
