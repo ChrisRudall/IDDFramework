@@ -27,7 +27,7 @@ private static function addDriver($job,$id = None){
 // var_dump($sql);
 // print_r($forjob->pickup_time);
     $rs = database::query($sql);
-    while ($shift = $rs->fetch_object('InDemandDigital\Entities\Shift')){
+    while ($shift = $rs->fetch_object('InDemandDigital\IDDFramework\Entities\Shift')){
         // var_dump(self::$added_drivers);
         if(in_array($shift->id,self::$added_drivers) || in_array($shift->id,self::$locked_drivers)){
             continue;
@@ -74,7 +74,7 @@ public static function calculateScheduleForEventID($event_id){
 
     //get all the jobs
     $alljobs = Ent\Job::getFutureJobs();
-    while ($job = $alljobs->fetch_object('InDemandDigital\Entities\Job')) {
+    while ($job = $alljobs->fetch_object('InDemandDigital\IDDFramework\Entities\Job')) {
         self::$pointer++;
         $success = 0;
         $job->embellishJobWithObjects();
@@ -112,7 +112,7 @@ public static function calculateScheduleForEventID($event_id){
 
 
         //work out each drivers distance to job
-        while( $shift = $rs->fetch_object('InDemandDigital\Entities\Shift')){
+        while( $shift = $rs->fetch_object('InDemandDigital\IDDFramework\Entities\Shift')){
             $shift->setLeadTime($job);
         }
 
@@ -129,7 +129,7 @@ public static function calculateScheduleForEventID($event_id){
             printf('job %s at %s is locked to %s and driver is already added<br>',self::$pointer,$job->from->name,$job->assigned_shift);
 
             //try and add the locked driver from existing list
-            while ($shift = $rs->fetch_object('InDemandDigital\Entities\Shift')) {
+            while ($shift = $rs->fetch_object('InDemandDigital\IDDFramework\Entities\Shift')) {
                 // print_r($shift);
                 if($job->assigned_shift == $shift->id){
                     $job->assigned_shift = $shift->id;
@@ -159,7 +159,7 @@ public static function calculateScheduleForEventID($event_id){
                     $alljobs->data_seek(self::$pointer);
 
                     print_r('--go check one<br>');
-                    $tempjob = $alljobs->fetch_object('InDemandDigital\Entities\Job');
+                    $tempjob = $alljobs->fetch_object('InDemandDigital\IDDFramework\Entities\Job');
                     self::$pointer++;
 
                     print_r('--go back one<br>');
@@ -193,7 +193,7 @@ public static function calculateScheduleForEventID($event_id){
             //     }
             // }
             do{
-                $job->assigned_shift = $rs->fetch_object('InDemandDigital\Entities\Shift');
+                $job->assigned_shift = $rs->fetch_object('InDemandDigital\IDDFramework\Entities\Shift');
 
                 if(empty($job->assigned_shift)){
                     // print_r('call');
