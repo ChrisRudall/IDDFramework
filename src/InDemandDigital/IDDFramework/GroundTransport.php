@@ -57,7 +57,7 @@ private static function addLockedDriver($id){
 private static function getListOfAvailableShifts($pickup_time,$arrival_time){
     $pickup_time_str = $pickup_time->format("Y-m-d H:i:s");
     $arrival_time_str = $arrival_time->format("Y-m-d H:i:s");
-    $sql = "SELECT * FROM shifts_temp WHERE available_time<'$pickup_time_str' AND stop_time>'$arrival_time_str' ";
+    $sql = "SELECT * FROM shifts_temp WHERE available_time<'$pickup_time_str' AND stop_time>'$arrival_time_str' AND `make_available`='1'";
     // print_r($sql);
     $rs = Database::query($sql);
     return $rs;
