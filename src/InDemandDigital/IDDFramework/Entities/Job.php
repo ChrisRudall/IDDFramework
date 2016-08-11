@@ -36,6 +36,8 @@ class Job extends Entity{
                     'to_location'=>'To',
                     'estimated_time'=>'Estimated Time',
         'artistname'=>'Artist',
+        'artistname2'=>'Artist 2',
+        'artistname3'=>'Artist 3',
         'notes'=>'notes','locked'=>'Locked?'
 ];
         IDD\EchoData::echoArrayToTable($data,'t01',$fields);
@@ -86,15 +88,20 @@ class Job extends Entity{
                     'to_location'=>'To',
                     'estimated_time'=>'Estimated Time',
         'artistname'=>'Artist',
+        'artistname2'=>'Artist 2',
+        'artistname3'=>'Artist 3',
         'pickup_name'=>'Pickup Name',
         'passenger_contact'=>'Contact Number',
-        'notes'=>'notes'
+        'notes'=>'notes',
+        'passengers'=>'passengers'
         ];
         IDD\EchoData::echoArrayToTable($alljobs,'t01',$fields);
         $alljobs = [];
     }
 
     public function embellishJob(){
+        // var_dump($this);
+
         $from_location = new Location($this->from_location);
         $this->from_location = $from_location->name;
         $to_location = new Location($this->to_location);
@@ -112,6 +119,16 @@ class Job extends Entity{
             }else{
                 $this->pickup_name = $artist->name;
             }
+        }
+        if($this->performance_id_2 != "" && $this->performance_id_2 != "0"){
+            $p2 = new Performance($this->performance_id_2);
+            $a2 = new Artist($p2->artist_id);
+            $this->artistname2 = $a2->name;
+        }
+        if($this->performance_id_3 != "" &&$this->performance_id_3 != "0"){
+            $p3 = new Performance($this->performance_id_2);
+            $a3 = new Artist($p3->artist_id);
+            $this->artistname3 = $a3->name;
         }
     }
 

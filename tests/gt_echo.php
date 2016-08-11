@@ -23,8 +23,8 @@ use \InDemandDigital\IDDFramework\Crypto\Exception as Ex;
 <body>
 <?php
 IDD\Database::connect();
-IDD\GroundTransport::calculateScheduleForEventID(4);
-// Ent\Job::echoAllJobsByShiftForEventID(4);
+// IDD\GroundTransport::calculateScheduleForEventID(4);
+Ent\Job::echoAllJobsForEventID(4);
 ?>
 
     </body>
