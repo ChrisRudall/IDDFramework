@@ -71,7 +71,7 @@ class Job extends Entity{
 
         //job details
         // $sql = "SELECT * FROM `gt_jobs` WHERE `assigned_shift`='$shift' ORDER BY `pickup_time`";
-        $sql = "SELECT gt_jobs.*,performances.artist_id AS artist_id FROM gt_jobs,performances WHERE gt_jobs.`performance_id`=performances.id AND `assigned_shift`='$shift' ORDER BY pickup_time";
+        $sql = "SELECT gt_jobs.*,performances.artist_id AS artist_id FROM gt_jobs,performances WHERE gt_jobs.`performance_id`=performances.id AND `assigned_shift`='$shift->id' ORDER BY pickup_time";
 
         $result = IDD\Database::query($sql);
         $data = self::convertResultSetToObjectArray($result);
