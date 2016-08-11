@@ -6,3 +6,5 @@ keys
 *.lock
 
 vendor
+
+tests/data/logs

@@ -3,7 +3,7 @@
 namespace InDemandDigital;
 session_start();
 set_include_path('includes');
-Date_default_timezone_set('UTC');
+Date_default_timezone_set('Europe/London');
 require '../vendor/autoload.php';
 
 use \InDemandDigital\IDDFramework\Entities AS Ent;
