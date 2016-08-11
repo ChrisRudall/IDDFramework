@@ -37,7 +37,7 @@ class Job extends Entity{
                     'estimated_time'=>'Estimated Time',
         'artistname'=>'Artist',
         'artistname2'=>'Artist 2',
-        'artistname3'=>'Artist 3',
+
         'notes'=>'notes','locked'=>'Locked?'
 ];
         IDD\EchoData::echoArrayToTable($data,'t01',$fields);
@@ -89,7 +89,6 @@ class Job extends Entity{
                     'estimated_time'=>'Estimated Time',
         'artistname'=>'Artist',
         'artistname2'=>'Artist 2',
-        'artistname3'=>'Artist 3',
         'pickup_name'=>'Pickup Name',
         'passenger_contact'=>'Contact Number',
         'notes'=>'notes',
