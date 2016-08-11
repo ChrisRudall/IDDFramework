@@ -128,7 +128,9 @@ class Job extends Entity{
         $this->arrival_time = $arrival_time->add($this->duration);
         $this->pickup_time_str = $this->pickup_time->format('c');
         $this->arrival_time_str = $this->arrival_time->format('c');
-        // $this->arrival_time = $arrival_time->format("Y-m-d H:i:s");
+        if($this->assigned_shift){
+            $this->assigned_shift = new Shift($this->assigned_shift);
+        }
         //end embellish
     }
 }
