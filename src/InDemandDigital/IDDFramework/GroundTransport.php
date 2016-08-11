@@ -120,7 +120,7 @@ public static function calculateScheduleForEventID($event_id){
 
 
         //selects best fit job
-        $sql = "SELECT * FROM shifts_temp WHERE available_time<'$job->pickup_time_str' AND stop_time>'$job->arrival_time_str' AND `would_have_to_leave_at`>`available_time` ORDER BY would_have_to_leave_at DESC";
+        $sql = "SELECT * FROM shifts_temp WHERE available_time<'$job->pickup_time_str' AND stop_time>'$job->arrival_time_str' AND `would_have_to_leave_at`>`available_time` AND `make_available`='1' ORDER BY would_have_to_leave_at DESC";
         // print_r($sql);
         $rs = Database::query($sql);
 
