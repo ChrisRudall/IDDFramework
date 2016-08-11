@@ -70,7 +70,8 @@ class Job extends Entity{
 
         $shift = new Shift($shift);
         $driver = new StaffMember($shift->driver_id);
-        printf("Schedule for driver (ShiftID#%s) - %s %s (%s)",$shift->id,$driver->firstname, $driver->lastname,$shift->notes);
+        $vehicle = new Vehicle($shift->vehicle_id);
+        printf("<br>Schedule for driver (ShiftID#%s) - %s %s (%s) - in a %s %s %s seater",$shift->id,$driver->firstname, $driver->lastname,$shift->notes,$vehicle->make,$vehicle->model,$vehicle->capacity);
 
         //job details
         // $sql = "SELECT * FROM `gt_jobs` WHERE `assigned_shift`='$shift' ORDER BY `pickup_time`";
