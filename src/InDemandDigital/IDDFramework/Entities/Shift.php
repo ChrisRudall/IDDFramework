@@ -24,8 +24,10 @@ public function setLeadTime($job){
     $would_have_to_leave_at = clone $job->pickup_time;
     $would_have_to_leave_at->sub($this->leadtime);
     $would_have_to_leave_at_str = $would_have_to_leave_at->format("Y-m-d H:i:s");
+    $this->would_have_to_leave_at = $would_have_to_leave_at_str;
     // print_r($would_have_to_leave_at_str);
-    $sql = "UPDATE shifts_temp SET `would_have_to_leave_at`='$would_have_to_leave_at_str' WHERE id=$this->id";
+    $sql = "UPDATE `shifts_temp` SET `would_have_to_leave_at`='$would_have_to_leave_at_str' WHERE `id`='$this->id'";
+    // print_r($sql);
     IDD\Database::query($sql);
 }
 
