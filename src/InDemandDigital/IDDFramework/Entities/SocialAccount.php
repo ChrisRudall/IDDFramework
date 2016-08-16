@@ -38,6 +38,7 @@ function writeTwitterLog($logarray){
     }
     $logstring = implode(',',$logarray);
     $sql = "UPDATE `data` SET `twitter_log`='$logstring' WHERE `id`='$this->id'";
+    print_r($sql);
     return IDD\Database::query($sql);
 }
 
