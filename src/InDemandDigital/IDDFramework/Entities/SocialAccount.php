@@ -25,7 +25,7 @@ function getPosts(){
     else{
         $sql = "SELECT * FROM `data` WHERE `publish_date`<NOW() AND `expires`>NOW() AND `publish`='1' AND `account`='$account->account_name'";
     }
-    $r = Database::query($sql);
+    $r = IDD\Database::query($sql);
     return $r->fetch_all(MYSQLI_NUM);
 }
 
