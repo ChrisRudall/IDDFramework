@@ -36,7 +36,7 @@ function writeTwitterLog($logarray){
     if(getType($logarray) != 'array'){
         trigger_error('writeTwitterLog expects an array',E_USER_ERROR);
     }
-    array_splice($logarray,$this->no_repeat)
+    array_splice($logarray,$this->no_repeat);
     $logstring = implode(',',$logarray);
     $sql = "UPDATE `accounts` SET `twitter_log`='$logstring' WHERE `account_id`='$this->account_id'";
     // print_r($sql);
