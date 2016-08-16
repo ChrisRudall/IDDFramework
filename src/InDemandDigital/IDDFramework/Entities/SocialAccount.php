@@ -19,11 +19,11 @@ class SocialAccount extends Entity{
     }
 
 function getPosts(){
-    if($account->include_any == 1){
-        $sql = "SELECT * FROM `data` WHERE `publish_date`<NOW() AND `expires`>NOW() AND `publish`='1' AND(`account`='$account->account_name' OR `account`='any')";
+    if($this->include_any == 1){
+        $sql = "SELECT * FROM `data` WHERE `publish_date`<NOW() AND `expires`>NOW() AND `publish`='1' AND(`account`='$this->account_name' OR `account`='any')";
     }
     else{
-        $sql = "SELECT * FROM `data` WHERE `publish_date`<NOW() AND `expires`>NOW() AND `publish`='1' AND `account`='$account->account_name'";
+        $sql = "SELECT * FROM `data` WHERE `publish_date`<NOW() AND `expires`>NOW() AND `publish`='1' AND `account`='$this->account_name'";
     }
     $r = IDD\Database::query($sql);
     return $r->fetch_all(MYSQLI_NUM);
