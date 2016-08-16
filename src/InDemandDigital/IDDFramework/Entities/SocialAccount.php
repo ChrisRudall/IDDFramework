@@ -26,7 +26,10 @@ function getPosts(){
         $sql = "SELECT * FROM `data` WHERE `publish_date`<NOW() AND `expires`>NOW() AND `publish`='1' AND `account`='$this->account_name'";
     }
     $r = IDD\Database::query($sql);
-    return $r->fetch_all(MYSQLI_ASSOC);
+    while($post = $r->fetch_object('InDemandDigital\IDDFramework\Entities\SocialPost')){
+        $postarray [] = $post;
+    }
+        return $postarray;
 }
 
 
