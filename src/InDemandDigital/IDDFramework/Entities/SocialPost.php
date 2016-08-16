@@ -12,10 +12,9 @@ class SocialPost extends Entity{
             // Debug::nicePrint($sql);
             $r = $p->fetch_object('InDemandDigital\IDDFramework\Entities\SocialPost');
             if($r !== NULL){
-                // foreach ($r as $key => $value) {
-                //     $this->$key = $value;
-                // }
-                $this = $r;
+                foreach ($r as $key => $value) {
+                    $this->$key = $value;
+                }
             }
         }
     }
