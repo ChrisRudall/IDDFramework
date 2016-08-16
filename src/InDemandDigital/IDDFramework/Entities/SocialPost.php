@@ -12,39 +12,11 @@ class SocialPost extends Entity{
             // Debug::nicePrint($sql);
             $r = $p->fetch_object('InDemandDigital\IDDFramework\Entities\SocialPost');
             if($r !== NULL){
-                foreach ($r as $key => $value) {
-                    $this->$key = $value;
-                }
+                // foreach ($r as $key => $value) {
+                //     $this->$key = $value;
+                // }
+                $this = $r;
             }
-        }
-    }
-
-
-    function printText(){
-        if($this->text != ""){
-            echo "<div class='contentitem text'>";
-            echo $this->text;
-            echo "</div>";
-        }
-    }
-    function printURL(){
-        if($this->url != ""){
-            echo "<div class='contentitem url'>";
-            echo "<a href='$this->url'>";
-            echo $this->url;
-            echo "</a></div>";
-        }
-    }
-    function printMedia(){
-        if($this->media != ""){
-            echo "<div class='contentitem media'>";
-            echo "<img src='assets/$this->media'>";
-            echo "</div>";
-        }
-    }
-    function printMediaURL(){
-        if($this->media != ""){
-            echo "assets/".$this->media;
         }
     }
 }

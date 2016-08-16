@@ -11,23 +11,25 @@ class SocialAccount extends Entity{
             // Debug::nicePrint($sql);
             $r = $p->fetch_object('InDemandDigital\IDDFramework\Entities\SocialAccount');
             if($r !== NULL){
-                foreach ($r as $key => $value) {
-                    $this->$key = $value;
-                }
+                // foreach ($r as $key => $value) {
+                //     $this->$key = $value;
+                // }
+                $this = $r;
             }
         }
     }
 
-    function printAccountName(){
-        echo "<div class='accountname'>";
-        if($this->pretty_name != ""){
-            echo $this->pretty_name;
-        }else{
-            echo $this->account_name;
-        }
-        echo "</div>";
-
+function getPosts(){
+    if($account->include_any == 1){
+        $sql = "SELECT * FROM `data` WHERE `publish_date`<NOW() AND `expires`>NOW() AND `publish`='1' AND(`account`='$account->account_name' OR `account`='any')";
     }
+    else{
+        $sql = "SELECT * FROM `data` WHERE `publish_date`<NOW() AND `expires`>NOW() AND `publish`='1' AND `account`='$account->account_name'";
+    }
+    $r = Database::query($sql);
+    return $r->fetch_all(MYSQLI_NUM);
+}
+
 
 }
 ?>
