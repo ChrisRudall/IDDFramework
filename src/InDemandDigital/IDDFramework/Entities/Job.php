@@ -59,6 +59,15 @@ class Job extends Entity{
     }
 }
 
+public function echoAllJobs(){
+    $sql = "SELECT * FROM gt_shifts WHERE `startTime`>NOW() ORDER BY `start_time`";
+    $result = IDD\Database::query($sql);
+    while($shift = $result->fetch_object()){
+        self::echoJobsForShift($shift);
+    }
+}
+
+
     public static function echoJobsForShift($shift){
         // var_dump($shift);
         //driver details
