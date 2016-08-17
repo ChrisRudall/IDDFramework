@@ -23,8 +23,10 @@ use \InDemandDigital\IDDFramework\Crypto\Exception as Ex;
 <body>
 <?php
 IDD\Database::connect();
-IDD\GroundTransport::calculateSchedules();
-Ent\Job::echoAllJobsByShiftForEventID(4);
+
+$x = file_get_contents('data/location_matrix.json');
+print_r(json_decode($x));
+
 ?>
 
     </body>

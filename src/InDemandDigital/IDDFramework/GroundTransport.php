@@ -18,6 +18,7 @@ public static $added_drivers = [];
 private static $blocked_drivers = [];
 private static $logfile;
 private static $pointer = 0;
+public static $driver_buffer = 5;
 
 
 public static function calculateSchedules(){
@@ -173,7 +174,7 @@ private function shiftAssignSuccess($job){
     $previous_available_time = $job->assigned_shift->available_time;
     $available_time = $job->arrival_time;
     $arrival_prettystr = $job->arrival_time->format('H:i');
-    $available_time->modify('+10 minutes');
+    $available_time->modify('+'.$driver_buffer. 'minutes');
     $available_time_str = $available_time->format("Y-m-d H:i:s");
     $sql = "UPDATE shifts_temp SET `available_time`='$available_time_str',`previous_available_time`='$previous_available_time',`current_location`='{$job->to->id}',`last_job`='$job->id' WHERE `id`='{$job->assigned_shift->id}'";
     Database::query($sql);
