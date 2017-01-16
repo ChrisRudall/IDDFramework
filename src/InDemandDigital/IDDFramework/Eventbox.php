@@ -46,7 +46,7 @@ class Eventbox{
             $this->room = new Ent\Room($id);
             $this->room->prettydate = self::getNiceDate($this->room->start_time);
         }else{
-            $rooms = $this->event->getAllFutureRooms($this->roomlimit);
+            $rooms = $this->event->getAllRooms($this->roomlimit);
             $this->room = $rooms[$this->room_offset];
             $this->room->prettydate = self::getNiceDate($this->room->start_time);
         }
