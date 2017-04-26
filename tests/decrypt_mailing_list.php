@@ -18,7 +18,7 @@ $sql = "CREATE TABLE `public_decoded` (
   `firstname` varchar(512) DEFAULT NULL,
   `lastname` varchar(512) DEFAULT NULL,
   `email` varchar(512) DEFAULT NULL,
-  `email_created` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `email_created` timestamp NULL DEFAULT NULL,
   `email_viewcount` varchar(255) DEFAULT NULL,
   `event` varchar(255) DEFAULT NULL,
   `orderid` varchar(255) DEFAULT NULL,
@@ -90,8 +90,8 @@ function addPerson($person){
     $sqlvar_string = implode(',',$sqlvar_array);
     $sqlcol_string = implode(',',$sqlcol_array);
 
-    $sql = "INSERT INTO `public_decoded` (`email`,`name`,`firstname`,`lastname`,`dob`,`address`,`postcode`,`mobile`,`facebook`,`tickets_requested`,`sex`)
-    VALUES ('$person->email','$person->name','$person->firstname','$person->lastname','$person->dob','$person->address','$person->postcode','$person->mobile','$person->facebook','$person->tickets_requested','$person->sex');";
+    $sql = "INSERT INTO `public_decoded` (`email`,`name`,`firstname`,`lastname`,`dob`,`address`,`postcode`,`mobile`,`facebook`,`tickets_requested`,`sex`,`uuid`,`email_created`)
+    VALUES ('$person->email','$person->name','$person->firstname','$person->lastname','$person->dob','$person->address','$person->postcode','$person->mobile','$person->facebook','$person->tickets_requested','$person->sex','$person->uuid','$person->email_created');";
 
     // $sql = "INSERT INTO `public_decoded` (`email`,`name`,`firstname`,`lastname`,`dob`,`address`,`postcode`,`mobile`,`facebook`,`tickets_requested`,`sex`)
     // VALUES ('$person->email','$person->name','$person->firstname','$person->lastname','$person->dob','$person->address','$person->postcode','$person->mobile','$person->facebook','$person->tickets_requested','$person->sex');";
